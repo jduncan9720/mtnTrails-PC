@@ -4,9 +4,14 @@ const Sculpture = require('./Sculpture')
 
 Painting.belongsTo(Artist);
 
+Artist.hasMany(Painting, {
+    foreignKey: 'artist_id',
+    onDelete: 'CASCADE'
+})
+
 Sculpture.belongsTo(Artist);
 
-Artist.hasMany(Painting, {
+Artist.hasMany(Sculpture, {
     foreignKey: 'artist_id',
     onDelete: 'CASCADE'
 })

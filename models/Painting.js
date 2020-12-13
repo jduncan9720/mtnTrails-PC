@@ -14,9 +14,31 @@ Painting.init(
         },
         painting_name: {
             type: DataTypes.STRING,
-            
+            allowNull: false,
+        },
+        painting_width: {
+            type: DataTypes.DECIMAL,
+            validate: {
+                isDecimal: true,
+            }
+        },
+        painting_height: {
+            type: DataTypes.DECIMAL,
+            validate: {
+                isDecimal: true,
+            }
+        },
+        painting_price: {
+            type: DataTypes.DECIMAL,
+            validate: {
+                isDecimal: true,
+            }
+        },
+        artist_id: {
+            type: DataTypes.INTEGER,
+            references: 'artist',
+            key: 'id'
         }
-
     },
     {
         sequelize,
