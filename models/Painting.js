@@ -17,22 +17,26 @@ Painting.init(
             allowNull: false,
         },
         painting_height: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.DECIMAL(10, 2),
             validate: {
                 isDecimal: true,
             }
         },
         painting_width: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.DECIMAL(10, 2),
             validate: {
                 isDecimal: true,
             }
         },
         painting_price: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.DECIMAL(10, 2),
             validate: {
                 isDecimal: true,
             }
+        },
+        painting_filename: {
+            type: DataTypes.STRING,
+            allowNull: false,
         },
         artist_id: {
             type: DataTypes.INTEGER,
@@ -44,10 +48,10 @@ Painting.init(
     },
     {
         sequelize,
-        timestamps: false,
+        timestamps: true,
         freezeTableName: true,
         underscored: true,
-        modelName: 'paintings',
+        modelName: 'painting',
     }
 
 );

@@ -7,6 +7,7 @@ const sculptureData = [
         sculpture_width: 14.00,
         sculpture_depth: 7.00,
         sculpture_price: 5000.00,
+        sculpture_filename: "bryce1.jpg",
         artist_id: 4
     },
     {
@@ -15,6 +16,7 @@ const sculptureData = [
         sculpture_width: 12.00,
         sculpture_depth: 10.00,
         sculpture_price: 9000.00,
+        sculpture_filename: "bryce2.jpg",
         artist_id: 4
     },
     {
@@ -23,6 +25,7 @@ const sculptureData = [
         sculpture_width: 22.75,
         sculpture_depth: 10.25,
         sculpture_price: 11000.00,
+        sculpture_filename: "walt1.jpg",
         artist_id: 5
     },
     {
@@ -31,6 +34,7 @@ const sculptureData = [
         sculpture_width: 8.25,
         sculpture_depth: 8.75,
         sculpture_price: 7000.00,
+        sculpture_filename: "walt2.jpg",
         artist_id: 5
     },
     

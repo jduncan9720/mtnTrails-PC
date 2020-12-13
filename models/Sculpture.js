@@ -17,28 +17,32 @@ Sculpture.init(
             allowNull: false,
         },
         sculpture_height: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.DECIMAL(10, 2),
             validate: {
                 isDecimal: true,
             }
         },
         sculpture_width: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.DECIMAL(10, 2),
             validate: {
                 isDecimal: true,
             }
         },
         sculpture_depth: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.DECIMAL(10, 2),
             validate: {
                 isDecimal: true,
             }
         },
         sculpture_price: {
-            type: DataTypes.DECIMAL,
+            type: DataTypes.DECIMAL(10, 2),
             validate: {
                 isDecimal: true,
             }
+        },
+        sculpture_filename: {
+            type: DataTypes.STRING,
+            allowNull: false,
         },
         artist_id: {
             type: DataTypes.INTEGER,
@@ -50,7 +54,7 @@ Sculpture.init(
     },
     {
         sequelize,
-        timestamps: false,
+        timestamps: true,
         freezeTableName: true,
         underscored: true,
         modelName: 'sculpture',
