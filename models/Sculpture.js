@@ -42,8 +42,10 @@ Sculpture.init(
         },
         artist_id: {
             type: DataTypes.INTEGER,
-            references: 'artist',
-            key: 'id'
+            references: {
+                model: 'artist',
+                key: 'id'
+            }
         }
     },
     {
@@ -55,3 +57,5 @@ Sculpture.init(
     }
 
 );
+
+module.exports = Sculpture;

@@ -36,8 +36,10 @@ Painting.init(
         },
         artist_id: {
             type: DataTypes.INTEGER,
-            references: 'artist',
-            key: 'id'
+            references: {
+                model: 'artist',
+                key: 'id'
+            }
         }
     },
     {
@@ -49,3 +51,5 @@ Painting.init(
     }
 
 );
+
+module.exports = Painting;
