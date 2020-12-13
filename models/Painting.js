@@ -16,13 +16,13 @@ Painting.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        painting_width: {
+        painting_height: {
             type: DataTypes.DECIMAL,
             validate: {
                 isDecimal: true,
             }
         },
-        painting_height: {
+        painting_width: {
             type: DataTypes.DECIMAL,
             validate: {
                 isDecimal: true,

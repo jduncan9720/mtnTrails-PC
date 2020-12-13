@@ -16,13 +16,13 @@ Sculpture.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        sculpture_width: {
+        sculpture_height: {
             type: DataTypes.DECIMAL,
             validate: {
                 isDecimal: true,
             }
         },
-        sculpture_height: {
+        sculpture_width: {
             type: DataTypes.DECIMAL,
             validate: {
                 isDecimal: true,
