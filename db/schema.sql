@@ -1,0 +1,5 @@
+-- DROP DATABASE
+DROP DATABASE IF EXISTS mtgparkcity_db;
+
+-- CREATE DATABASE
+CREATE DATABASE mtgparkcity_db;
