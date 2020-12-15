@@ -1,0 +1,11 @@
+body {
+    background-color:darkgrey;
+}
+
+.form-group {
+    width: 70%;
+}
+
+h2 {
+    color: rgb(252, 0, 0);
+}

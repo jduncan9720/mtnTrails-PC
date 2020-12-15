@@ -48,4 +48,14 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+//CREATE a new Painting
+
+router.post('/', async (req, res) => {
+    try {
+        const newPainting = Painting.create(req.body);
+        res.status(200).json(newPainting);
+    } catch (err) {
+        res.status(400).json(err);
+    }
+});
 module.exports = router;
