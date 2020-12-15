@@ -1,14 +1,19 @@
-const axios = require("axios")
-
+//Create a new artist from form.
 $('#newArtist').on("submit", function (event) {
     event.preventDefault();
-    axios.post("/api/artists", {
-        artist_firstName: $('#artistFirstName').val(),
-        artist_lastName: $('#artistLastName').val()
-    }).then(response => {
-        console.log(response.data)
-    })
-    .catch (function (error) {
-        console.log(error)
-    })
+    const queryURL = "http://localhost:3001/api/artists"
+    const firstName = $('#artistFirstName').val()
+    const lastName = $('#artistLastName').val()
+        $.ajax({
+            type: "POST",
+            url: queryURL,
+            data: { 
+                artist_firstName: firstName,
+                artist_lastName: lastName
+            },
+            success: console.log("Name added"),
+            dataType: "json"
+        });
+
 });
+
