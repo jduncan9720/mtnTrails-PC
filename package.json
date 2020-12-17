@@ -23,6 +23,7 @@
   },
   "homepage": "https://github.com/jduncan9720/mtnTrails-PC#readme",
   "dependencies": {
+    "aws-sdk": "^2.813.0",
     "axios": "^0.21.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
