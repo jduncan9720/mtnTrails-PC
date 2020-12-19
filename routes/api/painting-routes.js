@@ -56,17 +56,16 @@ router.get('/:id', async (req, res) => {
 
 //CREATE a new Painting
 
-router.post('/', type, async (req, res) => {
+router.post('/', uploadFile.single('painting_filename'), async (req, res) => {
     try {
         console.log(req.body)
         console.log(req.file)
-        const result = await uploadFile(req.file)
-        req.body.painting_filename = req.file.originalname
+        
+        req.body.painting_filename = req.file.key
         console.log(result)
         const newPainting = Painting.create(req.body);
         res.status(200).json(newPainting);
-        
-        
+    
     } catch (err) {
         res.status(400).json(err);
     }
