@@ -37,28 +37,33 @@ $('#newArtist').on("submit", function (event) {
 $('#newPainting').on("submit", function (event) {
     event.preventDefault();
     const queryURL = "http://localhost:3001/api/paintings"
-    const paintingName = $('#paintingName').val()
-    const paintingHeight = $('#paintingHeight').val()
-    const paintingWidth = $('#paintingWidth').val()
-    const paintingPrice = $('#paintingPrice').val()
-    const paintingArtist = $('#paintingArtist').val()
-    const paintingFilename = $('#paintingFile').val().match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1]
+    const data = new FormData(this);
+    console.log(data)
 
-    console.log(paintingName, paintingHeight, paintingWidth, paintingPrice, paintingArtist, paintingFilename)
+    for (var pair of data.entries()) {
+        console.log(pair[0] + ' ' + pair[1])
+    }
+    // const paintingName = $('#paintingName').val()
+    // const paintingHeight = $('#paintingHeight').val()
+    // const paintingWidth = $('#paintingWidth').val()
+    // const paintingPrice = $('#paintingPrice').val()
+    // const paintingArtist = $('#paintingArtist').val()
+    // const paintingFilename = $('#paintingFile').val().match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1]
+    console.log($('#paintingFile'))
+    const file = ($('#paintingFile')[0].files[0])
 
     $.ajax({
         type: "POST",
+        dataType: "json",
+        processData: false,
+        contentType: false,
         url: queryURL,
-        data: {
-            painting_name: paintingName,
-            painting_height: paintingHeight,
-            painting_width: paintingWidth,
-            painting_price: paintingPrice,
-            painting_filename: paintingFilename,
-            artist_id: paintingArtist
-        },
+        enctype: "multipart/form-data",
+        data: data,
         success: console.log("Painting added"),
-        dataType: "json"
+        error: function(error){
+            console.log(error)
+        }
     });
 
     // const formData = new FormData();
