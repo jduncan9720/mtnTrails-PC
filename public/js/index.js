@@ -12,6 +12,7 @@ $(document).ready(function () {
         for (var i = 0; i < artists.length; i++) {
             $('<option/>').val(artists[i].value).html(artists[i].name).appendTo('#artist_id');
             $('<option/>').val(artists[i].value).html(artists[i].name).appendTo('#Sartist_id');
+            $('<option/>').val(artists[i].value).html(artists[i].name).appendTo('#allartist_id');
         }
     });
 });
@@ -52,7 +53,7 @@ $('#newPainting').on("submit", function (event) {
     // const paintingFilename = $('#paintingFile').val().match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1]
     console.log($('#paintingFile'))
     const file = ($('#paintingFile')[0].files[0])
-    
+
     $.ajax({
         type: "POST",
         dataType: "json",
@@ -62,7 +63,7 @@ $('#newPainting').on("submit", function (event) {
         enctype: "multipart/form-data",
         data: data,
         success: console.log("Painting added"),
-        error: function(error){
+        error: function (error) {
             console.log(error)
         }
     });
@@ -85,7 +86,7 @@ $('#newSculpture').on("submit", function (event) {
     // const paintingFilename = $('#paintingFile').val().match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1]
     console.log($('#sculptureFile'))
     const file = ($('#sculptureFile')[0].files[0])
-    
+
     $.ajax({
         type: "POST",
         dataType: "json",
@@ -95,8 +96,29 @@ $('#newSculpture').on("submit", function (event) {
         enctype: "multipart/form-data",
         data: data,
         success: console.log("Sculpture added"),
-        error: function(error){
+        error: function (error) {
             console.log(error)
         }
     })
 });
+
+// $('#getTroy').on("click", function (event) {
+//     event.preventDefault();
+//     const queryURL = "http://localhost:3001/api/paintings/1"
+
+//     $.get(queryURL, function (res) {
+//         console.log(res[0])
+//         var imageArray = res.map(function (obj) {
+//             console.log(obj)
+//             return { location: obj.painting_location};
+//         });
+//         images = imageArray;
+//         console.log(images)
+//         for (var i = 0; i < images.length; i++) {
+//             var img = $('<img>'); 
+//             img.attr({"src":images[i].location, "height":300})
+//             img.appendTo('#imagesTestArea');
+//             // img.attr('src', images[i].location);
+//         }
+//     });
+//     });
