@@ -59,9 +59,10 @@ router.get('/:id', async (req, res) => {
 router.post('/', uploadFile.single('painting_filename'), async (req, res) => {
     try {
         console.log(req.body)
-        console.log(req.file)
+        console.log("fileData", req.file)
         
         req.body.painting_filename = req.file.key
+        req.body.painting_location = req.file.location
         
         const newPainting = Painting.create(req.body);
         res.status(200).json(newPainting);

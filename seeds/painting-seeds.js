@@ -7,7 +7,8 @@ const paintingData = [
         painting_width: 40.00,
         painting_price: 14000.00,
         painting_filename: "troy1.jpg",
-        artist_id: 1
+        artist_id: 1,
+        painting_location: "https://mtgartworkbucket.s3.amazonaws.com/1608488118301-Stoic.jpg"
     },
     {
         painting_name: 'Troy 2',
@@ -15,7 +16,8 @@ const paintingData = [
         painting_width: 44.75,
         painting_price: 15000.00,
         painting_filename: "troy2.jpg",
-        artist_id: 1
+        artist_id: 1,
+        painting_location: "https://mtgartworkbucket.s3.amazonaws.com/1608488118301-Stoic.jpg"
     },
     {
         painting_name: 'Simon 1',
@@ -23,7 +25,8 @@ const paintingData = [
         painting_width: 24.00,
         painting_price: 8000.00,
         painting_filename: "simon1.jpg",
-        artist_id: 2
+        artist_id: 2,
+        painting_location: "https://mtgartworkbucket.s3.amazonaws.com/1608488118301-Stoic.jpg"
     },
     {
         painting_name: 'Simon 2',
@@ -31,7 +34,8 @@ const paintingData = [
         painting_width: 30.50,
         painting_price: 10000.00,
         painting_filename: "simon2.jpg",
-        artist_id: 2
+        artist_id: 2,
+        painting_location: "https://mtgartworkbucket.s3.amazonaws.com/1608488118301-Stoic.jpg"
     },
     {
         painting_name: 'Mark 1',
@@ -39,7 +43,8 @@ const paintingData = [
         painting_width: 16.00,
         painting_price: 3000.00,
         painting_filename: "mark1.jpg",
-        artist_id: 3
+        artist_id: 3,
+        painting_location: "https://mtgartworkbucket.s3.amazonaws.com/1608488118301-Stoic.jpg"
     },
     {
         painting_name: 'Mark 2',
@@ -47,7 +52,8 @@ const paintingData = [
         painting_width: 40.00,
         painting_price: 20000.00,
         painting_filename: "mark2.jpg",
-        artist_id: 3
+        artist_id: 3,
+        painting_location: "https://mtgartworkbucket.s3.amazonaws.com/1608488118301-Stoic.jpg"
     },
 ];
 

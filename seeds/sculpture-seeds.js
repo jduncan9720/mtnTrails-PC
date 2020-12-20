@@ -8,7 +8,8 @@ const sculptureData = [
         sculpture_depth: 7.00,
         sculpture_price: 5000.00,
         sculpture_filename: "bryce1.jpg",
-        artist_id: 4
+        artist_id: 4,
+        sculpture_location: "https://mtgartworkbucket.s3.amazonaws.com/1608488118301-Stoic.jpg"
     },
     {
         sculpture_name: 'Bryce 2',
@@ -17,7 +18,8 @@ const sculptureData = [
         sculpture_depth: 10.00,
         sculpture_price: 9000.00,
         sculpture_filename: "bryce2.jpg",
-        artist_id: 4
+        artist_id: 4,
+        sculpture_location: "https://mtgartworkbucket.s3.amazonaws.com/1608488118301-Stoic.jpg"
     },
     {
         sculpture_name: 'Walt 1',
@@ -26,7 +28,8 @@ const sculptureData = [
         sculpture_depth: 10.25,
         sculpture_price: 11000.00,
         sculpture_filename: "walt1.jpg",
-        artist_id: 5
+        artist_id: 5,
+        sculpture_location: "https://mtgartworkbucket.s3.amazonaws.com/1608488118301-Stoic.jpg"
     },
     {
         sculpture_name: 'Walt 2',
@@ -35,7 +38,8 @@ const sculptureData = [
         sculpture_depth: 8.75,
         sculpture_price: 7000.00,
         sculpture_filename: "walt2.jpg",
-        artist_id: 5
+        artist_id: 5,
+        sculpture_location: "https://mtgartworkbucket.s3.amazonaws.com/1608488118301-Stoic.jpg"
     },
     
 ];

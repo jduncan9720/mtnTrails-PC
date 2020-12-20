@@ -50,6 +50,10 @@ Sculpture.init(
                 model: 'artist',
                 key: 'id'
             }
+        },
+        sculpture_location: {
+            type: DataTypes.STRING,
+            allowNull: false,
         }
     },
     {

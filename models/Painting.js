@@ -44,6 +44,10 @@ Painting.init(
                 model: 'artist',
                 key: 'id'
             }
+        }, 
+        painting_location: {
+            type: DataTypes.STRING,
+            allowNull: false,
         }
     },
     {
