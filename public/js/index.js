@@ -11,6 +11,7 @@ $(document).ready(function () {
         console.log(artists)
         for (var i = 0; i < artists.length; i++) {
             $('<option/>').val(artists[i].value).html(artists[i].name).appendTo('#artist_id');
+            $('<option/>').val(artists[i].value).html(artists[i].name).appendTo('#Sartist_id');
         }
     });
 });
