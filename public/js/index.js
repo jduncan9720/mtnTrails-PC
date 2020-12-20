@@ -102,23 +102,25 @@ $('#newSculpture').on("submit", function (event) {
     })
 });
 
-// $('#getTroy').on("click", function (event) {
-//     event.preventDefault();
-//     const queryURL = "http://localhost:3001/api/paintings/1"
-
-//     $.get(queryURL, function (res) {
-//         console.log(res[0])
-//         var imageArray = res.map(function (obj) {
-//             console.log(obj)
-//             return { location: obj.painting_location};
-//         });
-//         images = imageArray;
-//         console.log(images)
-//         for (var i = 0; i < images.length; i++) {
-//             var img = $('<img>'); 
-//             img.attr({"src":images[i].location, "height":300})
-//             img.appendTo('#imagesTestArea');
-//             // img.attr('src', images[i].location);
-//         }
-//     });
-//     });
+$('#getArtistImages').on("submit", function (event) {
+    event.preventDefault();
+    const URL = "http://localhost:3001/api/paintings/"
+    const id = $("#allartist_id").val()
+    const queryURL = URL + id
+    console.log(queryURL)
+    $.get(queryURL, function (res) {
+        console.log(res[0])
+        var imageArray = res.map(function (obj) {
+            console.log(obj)
+            return { location: obj.painting_location};
+        });
+        images = imageArray;
+        console.log(images)
+        for (var i = 0; i < images.length; i++) {
+            var img = $('<img>'); 
+            img.attr({"src":images[i].location, "height":300})
+            img.appendTo('#imagesTestArea');
+            // img.attr('src', images[i].location);
+        }
+    });
+    });
