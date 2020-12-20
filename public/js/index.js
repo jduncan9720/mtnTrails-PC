@@ -10,7 +10,7 @@ $(document).ready(function () {
         artists = artistArray;
         console.log(artists)
         for (var i = 0; i < artists.length; i++) {
-            $('<option/>').val(artists[i].value).html(artists[i].name).appendTo('#paintingArtist');
+            $('<option/>').val(artists[i].value).html(artists[i].name).appendTo('#artist_id');
         }
     });
 });
@@ -51,7 +51,7 @@ $('#newPainting').on("submit", function (event) {
     // const paintingFilename = $('#paintingFile').val().match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1]
     console.log($('#paintingFile'))
     const file = ($('#paintingFile')[0].files[0])
-
+    
     $.ajax({
         type: "POST",
         dataType: "json",
@@ -66,23 +66,23 @@ $('#newPainting').on("submit", function (event) {
         }
     });
 
-    // const formData = new FormData();
-    // const fileField = document.querySelector('input[type="file"]');
-
-    // formData.append('username', 'abc123');
-    // formData.append('avatar', fileField.files[0]);
-
-    // fetch('https://example.com/profile/avatar', {
-    //     method: 'PUT',
-    //     body: formData
-    // })
-    //     .then(response => response.json())
-    //     .then(result => {
-    //         console.log('Success:', result);
-    //     })
-    //     .catch(error => {
-    //         console.error('Error:', error);
-    //     });
-
+    // $.ajax({
+    //     type: "POST",
+    //     dataType: "json",
+    //     url: queryURL,
+    //     data: 
+    //     {
+    //         painting_name: paintingName,
+    //         painting_height: paintingHeight,
+    //         painting_width: paintingWidth,
+    //         painting_price: paintingPrice,
+    //         painting_artist: paintingArtist,
+    //         painting_filename: file
+    //     },
+    //     success: console.log("Painting added"),
+    //     error: function(error){
+    //         console.log(error)
+    //     }
+    // });
 });
 
