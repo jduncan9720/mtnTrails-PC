@@ -65,24 +65,37 @@ $('#newPainting').on("submit", function (event) {
             console.log(error)
         }
     });
-
-    // $.ajax({
-    //     type: "POST",
-    //     dataType: "json",
-    //     url: queryURL,
-    //     data: 
-    //     {
-    //         painting_name: paintingName,
-    //         painting_height: paintingHeight,
-    //         painting_width: paintingWidth,
-    //         painting_price: paintingPrice,
-    //         painting_artist: paintingArtist,
-    //         painting_filename: file
-    //     },
-    //     success: console.log("Painting added"),
-    //     error: function(error){
-    //         console.log(error)
-    //     }
-    // });
 });
 
+$('#newSculpture').on("submit", function (event) {
+    event.preventDefault();
+    const queryURL = "http://localhost:3001/api/sculptures"
+    const data = new FormData(this);
+    console.log(data)
+
+    for (var pair of data.entries()) {
+        console.log(pair[0] + ' ' + pair[1])
+    }
+    // const paintingName = $('#paintingName').val()
+    // const paintingHeight = $('#paintingHeight').val()
+    // const paintingWidth = $('#paintingWidth').val()
+    // const paintingPrice = $('#paintingPrice').val()
+    // const paintingArtist = $('#paintingArtist').val()
+    // const paintingFilename = $('#paintingFile').val().match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1]
+    console.log($('#sculptureFile'))
+    const file = ($('#sculptureFile')[0].files[0])
+    
+    $.ajax({
+        type: "POST",
+        dataType: "json",
+        processData: false,
+        contentType: false,
+        url: queryURL,
+        enctype: "multipart/form-data",
+        data: data,
+        success: console.log("Sculpture added"),
+        error: function(error){
+            console.log(error)
+        }
+    })
+});

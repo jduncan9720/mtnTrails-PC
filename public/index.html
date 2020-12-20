@@ -54,7 +54,7 @@
             </div>
             <div class="form-group">
               <label for="paintingArtist">Artist Name:</label>
-              <select name="artist_id" class="custom-select mr-sm-2" id="artist_id">
+              <select name="artist_id" class="custom-select mr-sm-2 artistId" id="artist_id">
                 <option selected>Choose...</option>
               </select>
             </div>
@@ -72,30 +72,34 @@
           <h2>Add New Sculpture:</h2>
           <form id="newSculpture">
             <div class="form-group">
-              <label for="sculptureName">Painting Name:</label>
-              <input type="text" class="form-control" id="sculptureName" placeholder="Sculpture Name....">
+              <label for="sculptureName">Sculpture Name:</label>
+              <input name="sculpture_name" type="text" class="form-control" id="sculptureName" placeholder="Sculpture Name....">
             </div>
             <div class="form-group">
-              <label for="sculptureHeight">Painting Height:</label>
-              <input type="text" class="form-control" id="sculptureHeight" placeholder="Height in inches....">
+              <label for="sculptureHeight">Sculpture Height:</label>
+              <input name="sculpture_height" type="text" class="form-control" id="sculptureHeight" placeholder="Height in inches....">
             </div>
             <div class="form-group">
-              <label for="sculptureWidth">Painting Width:</label>
-              <input type="text" class="form-control" id="sculptureWidth" placeholder="Width in inches....">
+              <label for="sculptureWidth">Sculpture Width:</label>
+              <input name="sculpture_width" type="text" class="form-control" id="sculptureWidth" placeholder="Width in inches....">
             </div>
             <div class="form-group">
-              <label for="sculpturePrice">Painting Price:</label>
-              <input type="text" class="form-control" id="sculpturePrice" placeholder="Price....">
+              <label for="sculptureDepth">Sculpture Depth:</label>
+              <input name="sculpture_depth" type="text" class="form-control" id="sculptureDepth" placeholder="Depth in inches....">
+            </div>
+            <div class="form-group">
+              <label for="sculpturePrice">Scultpure Price:</label>
+              <input name="sculpture_price" type="text" class="form-control" id="sculpturePrice" placeholder="Price....">
             </div>
             <div class="form-group">
               <label for="sculptureArtist">Artist Name:</label>
-              <select class="custom-select mr-sm-2" id="sculptureArtist">
+              <select name="artist_id" class="custom-select mr-sm-2 artistId" id="artist_id">
                 <option selected>Choose...</option>
               </select>
             </div>
             <div class="form-group">
               <label for="sculptureFile">Upload Image:</label>
-              <input type="file" class="form-control-file" id="sculptureFile">
+              <input name="sculpture_filename" type="file" class="form-control-file" id="sculptureFile">
             </div>
             <br>
             <button type="submit" class="btn btn-primary">Submit</button>
