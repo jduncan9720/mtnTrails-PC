@@ -112,15 +112,28 @@ $('#getArtistImages').on("submit", function (event) {
         console.log(res[0])
         var imageArray = res.map(function (obj) {
             console.log(obj)
-            return { location: obj.painting_location};
+            return { 
+                location: obj.painting_location,
+                name: obj.painting_name,
+                size: obj.painting_height + "x" + obj.painting_width,
+                price: obj.painting_price
+            };
         });
         images = imageArray;
         console.log(images)
         for (var i = 0; i < images.length; i++) {
-            var img = $('<img>'); 
-            img.attr({"src":images[i].location, "height":300})
-            img.appendTo('#imagesTestArea');
+            var imgCardsDiv = $('<div class="card" id="imgCard">')
+            var img = $('<img class="card-img-top p-2" alt="Card image">').attr({"src":images[i].location, "width":20})
+            var cardbody = $('<div class="card-body">');
+            var title = $('<p class="card-title">').text(images[i].name + " - " + images[i].size + " - " + images[i].price)
+            var deleteButton = $('<a href="#" class="btn btn-primary">DELETE</a>')
+            img.appendTo(imgCardsDiv)
+            title.appendTo(cardbody)
+            deleteButton.appendTo(cardbody)
+            cardbody.appendTo(imgCardsDiv)
+            imgCardsDiv.appendTo('#imagesTestArea');
             // img.attr('src', images[i].location);
         }
     });
     });
+    
