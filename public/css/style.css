@@ -22,3 +22,17 @@ h2 {
     height: 30vh;
     object-fit: contain;
     }
+
+.card-body {
+    padding: 5px;
+}
+
+.card-title {
+    margin: 0px 0px 0px 5px;
+}
+
+.deletebtn {
+    height: 20px;
+    font-size: 10px;
+    padding-top: 2px;
+}

@@ -115,7 +115,7 @@ $('#getArtistImages').on("submit", function (event) {
             return { 
                 location: obj.painting_location,
                 name: obj.painting_name,
-                size: obj.painting_height + "x" + obj.painting_width,
+                size: obj.painting_height + " x " + obj.painting_width,
                 price: obj.painting_price
             };
         });
@@ -125,10 +125,14 @@ $('#getArtistImages').on("submit", function (event) {
             var imgCardsDiv = $('<div class="card" id="imgCard">')
             var img = $('<img class="card-img-top p-2" alt="Card image">').attr({"src":images[i].location, "width":20})
             var cardbody = $('<div class="card-body">');
-            var title = $('<p class="card-title">').text(images[i].name + " - " + images[i].size + " - " + images[i].price)
-            var deleteButton = $('<a href="#" class="btn btn-primary">DELETE</a>')
+            var title = $('<p class="card-title">').text("Name: " + images[i].name)
+            var size = $('<p class="card-title">').text("Size: " + images[i].size)
+            var price = $('<p class="card-title">').text("Price: " + images[i].price)
+            var deleteButton = $('<a href="#" class="btn btn-danger deletebtn">DELETE</a>')
             img.appendTo(imgCardsDiv)
             title.appendTo(cardbody)
+            size.appendTo(cardbody)
+            price.appendTo(cardbody)
             deleteButton.appendTo(cardbody)
             cardbody.appendTo(imgCardsDiv)
             imgCardsDiv.appendTo('#imagesTestArea');
