@@ -71,5 +71,24 @@ router.post('/', uploadFile.single('painting_filename'), async (req, res) => {
         res.status(400).json(err);
     }
 });
+
+// DELETE a Painting by ID
+
+router.delete('/:id', async (req, res) => {
+    try {
+        const paintingData = await Painting.destroy({
+            where: {
+                id: req.params.id,
+            }
+        });
+        if (!paintingData) {
+            res.status(404).json({ message: "There's no painting with that id!" });
+            return;
+        }
+        res.status(200).json(paintingData);
+    } catch (err) {
+        res.status(500).json(err)
+    }
+});
 module.exports = router;
 

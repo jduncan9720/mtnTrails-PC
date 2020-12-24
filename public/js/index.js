@@ -112,11 +112,12 @@ $('#getArtistImages').on("submit", function (event) {
         console.log(res[0])
         var imageArray = res.map(function (obj) {
             console.log(obj)
-            return { 
+            return {
                 location: obj.painting_location,
                 name: obj.painting_name,
                 size: obj.painting_height + " x " + obj.painting_width,
-                price: obj.painting_price
+                price: obj.painting_price,
+                id: obj.id
             };
         });
         images = imageArray;
@@ -128,7 +129,9 @@ $('#getArtistImages').on("submit", function (event) {
             var title = $('<p class="card-title">').text("Name: " + images[i].name)
             var size = $('<p class="card-title">').text("Size: " + images[i].size)
             var price = $('<p class="card-title">').text("Price: " + images[i].price)
-            var deleteButton = $('<a href="#" class="btn btn-danger deletebtn">DELETE</a>')
+            var deleteButton = $('<button type="button" class="btn btn-danger deletebtn" id="deleteBTN">DELETE</button>')
+            deleteButton.attr("data-deletevalue", images[i].id)
+            console.log(deleteButton)
             img.appendTo(imgCardsDiv)
             title.appendTo(cardbody)
             size.appendTo(cardbody)
@@ -138,6 +141,20 @@ $('#getArtistImages').on("submit", function (event) {
             imgCardsDiv.appendTo('#imagesTestArea');
             // img.attr('src', images[i].location);
         }
+
     });
     });
     
+
+$("#imagesTestArea").on("click", ".deletebtn", function(){
+    buttonVal=$(this).data("deletevalue")
+    queryURL = "http://localhost:3001/api/paintings/" + buttonVal
+    $.ajax({
+        url: queryURL,
+        type: 'DELETE',
+        success: console.log("Painting Deleted!"),
+        error: function (error) {
+            console.log(error)
+        }
+    });
+})
