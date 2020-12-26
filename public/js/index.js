@@ -124,7 +124,7 @@ $('#getArtistImages').on("submit", function (event) {
         console.log(images)
         for (var i = 0; i < images.length; i++) {
             var imgCardsDiv = $('<div class="card" id="imgCard">')
-            var img = $('<img class="card-img-top p-2" alt="Card image">').attr({"src":images[i].location, "width":20})
+            var img = $('<img class="card-img-top p-2" alt="Card image">').attr({ "src": images[i].location, "width": 20 })
             var cardbody = $('<div class="card-body">');
             var title = $('<p class="card-title">').text("Name: " + images[i].name)
             var size = $('<p class="card-title">').text("Size: " + images[i].size)
@@ -143,12 +143,28 @@ $('#getArtistImages').on("submit", function (event) {
         }
 
     });
-    });
-    
+});
 
-$("#imagesTestArea").on("click", ".deletebtn", function(){
-    buttonVal=$(this).data("deletevalue")
-    queryURL = "http://localhost:3001/api/paintings/" + buttonVal
+
+$("#imagesTestArea").on("click", ".deletebtn", async function () {
+    buttonVal = $(this).data("deletevalue")
+    fileURL = "http://localhost:3001/api/paintings/id/" + buttonVal
+    console.log(fileURL)
+    var delFileName;
+    //Get painting filename for delete
+    $.ajax({
+        type: "GET",
+        url: fileURL,
+        dataType: "json",
+        success: function (res) {
+            delFileName = res.painting_filename;
+            console.log(delFileName)
+        }
+        //How do I delete from S3 or call delete.js file function
+    });
+
+    //Delete painting from the database
+    var queryURL = "http://localhost:3001/api/paintings/" + buttonVal
     $.ajax({
         url: queryURL,
         type: 'DELETE',
@@ -157,4 +173,6 @@ $("#imagesTestArea").on("click", ".deletebtn", function(){
             console.log(error)
         }
     });
-})
+
+});
+

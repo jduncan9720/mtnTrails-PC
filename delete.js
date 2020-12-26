@@ -1,38 +1,22 @@
 const express = require('express');
-const app = express();
-const AWS = require('aws-sdk');
-const multer  = require('multer');
-const multers3 = require('multer-s3');
 
-// Enter copied or downloaded access ID and secret key here
-const ID = 'AKIAJXPH3N6A4O5A3N3A';
-const SECRET = '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';
+const deleteFile = (filename) => {
+  var params = {
+    Bucket: BUCKET_NAME,
+    Key: filename
+};
 
-
-// The name of the bucket that you have created
-const BUCKET_NAME = 'mtgartworkbucket';
-
-const s3 = new AWS.S3({
-    accessKeyId: ID,
-    secretAccessKey: SECRET
+s3.deleteObject(params, function (err, data) {
+    if (!err) {
+        console.log(data); // sucessfull response
+        /*
+        data = {}
+        */
+    } else {
+        console.log(err); // an error ocurred
+    }
 });
+}
 
-const deleteFile = multer({
-    storage: multers3({
-      s3: s3,
-      acl: 'public-read',
-      bucket: BUCKET_NAME,
-      metadata: (req, file, cb) => {
-        cb(null, {fieldName: file.fieldname})
-      },
-      key: (req, file, cb) => {
-        cb(null, Date.now().toString() + '-' + file.originalname)
-      }
-    })
-  });
+module.exports = deleteFile;
 
-//   app.post('/', uploadFile.single('painting_filename'),(req, res) => {
-//     console.log(req.file);
-//   });
-
-module.exports = uploadFile;

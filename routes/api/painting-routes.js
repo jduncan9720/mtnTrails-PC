@@ -4,6 +4,7 @@ const upload = multer({dest: 'uploads/'})
 const type = upload.single('painting_filename')
 const { Artist, Painting, Sculpture } = require('../../models');
 const uploadFile = require('../../upload')
+const deleteFile = require('../../delete')
 
 
 //GET all Paintings
@@ -20,20 +21,19 @@ router.get('/', async (req, res) => {
 });
 
 //Get Painting by Id
-// router.get('/:id', async (req, res) => {
-//     try {
-//         const paintingData = await Painting.findByPk(req.params.id, {
-//             include: [{ model: Artist}]
-//         });
-//         if (!paintingData) {
-//             res.status(404).json({ message: "There's no painting with that id!"});
-//             return;
-//         }
-//         res.status(200).json(paintingData);
-//     } catch (err) {
-//         res.status(500).json(err)
-//     }
-// });
+router.get('/id/:id', async (req, res) => {
+    try {
+        const paintingData = await Painting.findByPk(req.params.id, {
+            where: {
+                id: req.params.id,
+            }
+        });
+        res.status(200).json(paintingData);
+    } catch (err) {
+        console.log(err)
+        res.status(500).json(err)
+    }
+});
 
 //Get Paintings by Artist
 
