@@ -131,13 +131,16 @@ $('#getArtistImages').on("submit", function (event) {
             var size = $('<p class="card-title">').text("Size: " + images[i].size)
             var price = $('<p class="card-title">').text("Price: " + images[i].price)
             var deleteButton = $('<button type="button" class="btn btn-danger deletebtn" id="deleteBTN">DELETE</button>')
+            var editButton = $('<button type="button" class="btn btn-success editbtn" id="editBTN">EDIT</button>')
             deleteButton.attr("data-deletevalue", images[i].id)
+            editButton.attr("data-editvalue", images[i].id)
             console.log(deleteButton)
             img.appendTo(imgCardsDiv)
             title.appendTo(cardbody)
             size.appendTo(cardbody)
             price.appendTo(cardbody)
             deleteButton.appendTo(cardbody)
+            editButton.appendTo(cardbody)
             cardbody.appendTo(imgCardsDiv)
             imgCardsDiv.appendTo('#imagesTestArea');
             // img.attr('src', images[i].location);
@@ -177,3 +180,22 @@ $("#imagesTestArea").on("click", ".deletebtn", async function () {
 
 });
 
+//Edit Button
+$("#imagesTestArea").on("click", ".editbtn", async function () {
+    buttonVal = $(this).data("editvalue")
+    
+    queryURL = "http://localhost:3001/api/paintings/id/" + buttonVal
+    console.log(queryURL)
+    $.ajax({
+        url: queryURL,
+        type: 'GET',
+        dataType: 'json',
+        success: function (res) {
+            console.log(res)
+        },
+        error: function (error) {
+            console.log(error)
+        },
+    })
+
+});

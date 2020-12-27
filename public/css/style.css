@@ -36,3 +36,10 @@ h2 {
     font-size: 10px;
     padding-top: 2px;
 }
+
+.editbtn {
+    height: 20px;
+    font-size: 10px;
+    padding-top: 2px;
+    margin-left: 10px;
+}
