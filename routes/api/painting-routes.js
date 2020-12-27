@@ -6,6 +6,8 @@ const { Artist, Painting, Sculpture } = require('../../models');
 const uploadFile = require('../../upload')
 const deleteFile = require('../../delete')
 
+let paintingPath = "";
+
 
 //GET all Paintings
 router.get('/', async (req, res) => {
@@ -29,6 +31,8 @@ router.get('/id/:id', async (req, res) => {
             }
         });
         res.status(200).json(paintingData);
+        paintingPath = paintingData.painting_filename
+        console.log(paintingPath)
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
@@ -86,6 +90,7 @@ router.delete('/:id', async (req, res) => {
             return;
         }
         res.status(200).json(paintingData);
+        deleteFile(paintingPath)
     } catch (err) {
         res.status(500).json(err)
     }

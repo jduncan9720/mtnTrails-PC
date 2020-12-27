@@ -1,3 +1,4 @@
+
 //Get artist to put in drop down.
 let artists;
 
