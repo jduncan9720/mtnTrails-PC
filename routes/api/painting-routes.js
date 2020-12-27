@@ -76,6 +76,31 @@ router.post('/', uploadFile.single('painting_filename'), async (req, res) => {
     }
 });
 
+//EDIT a painting by ID
+router.put('/:id', async (req, res) => {
+    try {
+        const paintingData = await Painting.update(
+            {
+                name: req.body.painting_name,
+                height: req.body.painting_height,
+                width: req.body.painting_width,
+                price: req.body.painting_price,
+                artist: req.body.artist_id
+            },
+            {
+                where: {
+                    id: req.params.id
+                },
+            }
+        )
+        .then((updatedPainting) => {
+            res.json(updatedPainting)
+        })
+    } catch (err) {
+        res.status(400).json(err);
+    }
+})
+
 // DELETE a Painting by ID
 
 router.delete('/:id', async (req, res) => {
