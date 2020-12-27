@@ -68,7 +68,7 @@ router.post('/', uploadFile.single('painting_filename'), async (req, res) => {
         req.body.painting_filename = req.file.key
         req.body.painting_location = req.file.location
         
-        const newPainting = Painting.create(req.body);
+        const newPainting = await Painting.create(req.body);
         res.status(200).json(newPainting);
     
     } catch (err) {
