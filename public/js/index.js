@@ -131,7 +131,7 @@ $('#getArtistImages').on("submit", function (event) {
             var size = $('<p class="card-title">').text("Size: " + images[i].size)
             var price = $('<p class="card-title">').text("Price: " + images[i].price)
             var deleteButton = $('<button type="button" class="btn btn-danger deletebtn" id="deleteBTN">DELETE</button>')
-            var editButton = $('<button type="button" class="btn btn-success editbtn" id="editBTN">EDIT</button>')
+            var editButton = $('<button type="button" class="btn btn-success editbtn" id="editBTN" data-toggle="modal" data-target="#editModal">EDIT</button>')
             deleteButton.attr("data-deletevalue", images[i].id)
             editButton.attr("data-editvalue", images[i].id)
             console.log(deleteButton)
@@ -164,7 +164,7 @@ $("#imagesTestArea").on("click", ".deletebtn", async function () {
             delFileName = res.painting_filename;
             console.log(delFileName)
         }
-        //How do I delete from S3 or call delete.js file function
+        //AWS s3 delete runs through the painitng_routes
     });
 
     //Delete painting from the database
@@ -183,7 +183,6 @@ $("#imagesTestArea").on("click", ".deletebtn", async function () {
 //Edit Button
 $("#imagesTestArea").on("click", ".editbtn", async function () {
     buttonVal = $(this).data("editvalue")
-    
     queryURL = "http://localhost:3001/api/paintings/id/" + buttonVal
     console.log(queryURL)
     $.ajax({
@@ -191,11 +190,34 @@ $("#imagesTestArea").on("click", ".editbtn", async function () {
         type: 'GET',
         dataType: 'json',
         success: function (res) {
-            console.log(res)
+            console.log(res.painting_name)
+            console.log(res.painting_height)
+            console.log(res.painting_width)
+            console.log(res.painting_price)
+            console.log(res.artist_id)
+            console.log(res.painting_location)
+            var modalHeader = `<div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">${res.painting_name}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>`;
+            var modalBody = `<div class="modal-body">
+                <h3>${res.painting_name}</h3>
+                <h3>${res.painting_height} x ${res.painting_width}</h3>
+                <h3>${res.painting_price}</h3>
+                <h3>${res.artist_id}</h3>
+            </div>`
+            var modalFooter = `<div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>`
+            $(modalHeader).appendTo("#modalContent")
+            $(modalBody).appendTo("#modalContent")
+            $(modalFooter).appendTo("#modalContent")
         },
         error: function (error) {
             console.log(error)
         },
     })
-
 });
