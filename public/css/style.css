@@ -11,7 +11,7 @@ h2 {
 }
 
 #imgCard{
-    width: 200px;
+    width: 300px;
     display: inline-block;
     margin: 5px;
 
@@ -42,4 +42,8 @@ h2 {
     font-size: 10px;
     padding-top: 2px;
     margin-left: 10px;
+}
+
+#editImage {
+    width: 100%;
 }

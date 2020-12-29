@@ -197,16 +197,32 @@ $("#imagesTestArea").on("click", ".editbtn", async function () {
             console.log(res.artist_id)
             console.log(res.painting_location)
             var modalHeader = `<div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">${res.painting_name}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
+                <img class="modal-image" id="editImage" src="${res.painting_location}">
             </div>`;
             var modalBody = `<div class="modal-body">
-                <h3>${res.painting_name}</h3>
-                <h3>${res.painting_height} x ${res.painting_width}</h3>
-                <h3>${res.painting_price}</h3>
-                <h3>${res.artist_id}</h3>
+                <form>
+                <div class="form-group">
+                <label for="editNameInput">Name:</label>
+                <input type="text" class="form-control" id="editNameInput" value="${res.painting_name}">
+                </div>
+                <div class="form-group">
+                <label for="editHeightInput">Height:</label>
+                <input type="text" class="form-control" id="editHeightInput" value="${res.painting_height}">
+                </div>
+                <div class="form-group">
+                <label for="editWidthInput">Width:</label>
+                <input type="text" class="form-control" id="editWidthInput" value="${res.painting_width}">
+                </div>
+                <div class="form-group">
+                <label for="editPriceInput">Price:</label>
+                <input type="text" class="form-control" id="editWidthInput" value="${res.painting_price}">
+                </div>
+                <div class="form-group">
+                <label for="editArtistInput">Artist:</label>
+                <input type="text" class="form-control" id="editArtistInput" value="${res.artist_id}">
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+                </form>  
             </div>`
             var modalFooter = `<div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
