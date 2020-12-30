@@ -79,6 +79,7 @@ router.post('/', uploadFile.single('painting_filename'), async (req, res) => {
 //EDIT a painting by ID
 router.put('/:id', async (req, res) => {
     try {
+        console.log(req.body)
         const paintingData = await Painting.update(
             {
                 name: req.body.painting_name,

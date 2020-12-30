@@ -194,6 +194,7 @@ $("#imagesTestArea").on("click", ".editbtn", async function () {
         type: 'GET',
         dataType: 'json',
         success: function (res) {
+            console.log(res.id)
             console.log(res.painting_name)
             console.log(res.painting_height)
             console.log(res.painting_width)
@@ -203,7 +204,7 @@ $("#imagesTestArea").on("click", ".editbtn", async function () {
             var modalHeader = `<div class="modal-header">
                 <img class="modal-image" id="editImage" src="${res.painting_location}">
             </div>`;
-            var modalBody = `<div class="modal-body">
+            var modalBody = `<div class="modal-body" id="editForm">
             <form id="editPainting">
             <div class="form-group">
               <label for="editpaintingName">Painting Name:</label>
@@ -228,7 +229,7 @@ $("#imagesTestArea").on("click", ".editbtn", async function () {
               </select>
             </div>
             <br>
-            <button type="submit" class="btn btn-primary">Submit</button>
+            <button type="submit" class="btn btn-primary" id="editSubmit" data-paintingvalue="${res.id}">Submit</button>
           </form>  
             </div>`
             var modalFooter = `<div class="modal-footer">
@@ -255,12 +256,11 @@ $("#imagesTestArea").on("click", ".editbtn", async function () {
 });
 
 //Edit painting by ID
-$('#editPainting').on("submit", function (event) {
+$('#editModal').on("submit", function (event) {
     event.preventDefault();
-    const editUrl = "http://localhost:3001/api/paintings/" + editId
-    const editId = $("#editBTN").val()
-    const data = new FormData(this);
-    console.log(data)
+    const submitVal = $('#editSubmit').data("paintingvalue")
+    const editUrl = "http://localhost:3001/api/paintings/" + submitVal
+    console.log(editUrl)
 
     // alert(editUrl)
     // $.ajax({
