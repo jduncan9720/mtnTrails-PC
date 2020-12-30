@@ -105,6 +105,7 @@ $('#newSculpture').on("submit", function (event) {
 
 $('#getArtistImages').on("submit", function (event) {
     event.preventDefault();
+    $('#imagesTestArea').empty()
     const URL = "http://localhost:3001/api/paintings/"
     const id = $("#allartist_id").val()
     const queryURL = URL + id
@@ -182,6 +183,9 @@ $("#imagesTestArea").on("click", ".deletebtn", async function () {
 
 //Edit Button
 $("#imagesTestArea").on("click", ".editbtn", async function () {
+    $("#modalContent").empty()
+
+    const artistURL = "http://localhost:3001/api/artists"
     buttonVal = $(this).data("editvalue")
     queryURL = "http://localhost:3001/api/paintings/id/" + buttonVal
     console.log(queryURL)
@@ -200,33 +204,35 @@ $("#imagesTestArea").on("click", ".editbtn", async function () {
                 <img class="modal-image" id="editImage" src="${res.painting_location}">
             </div>`;
             var modalBody = `<div class="modal-body">
-                <form>
-                <div class="form-group">
-                <label for="editNameInput">Name:</label>
-                <input type="text" class="form-control" id="editNameInput" value="${res.painting_name}">
-                </div>
-                <div class="form-group">
-                <label for="editHeightInput">Height:</label>
-                <input type="text" class="form-control" id="editHeightInput" value="${res.painting_height}">
-                </div>
-                <div class="form-group">
-                <label for="editWidthInput">Width:</label>
-                <input type="text" class="form-control" id="editWidthInput" value="${res.painting_width}">
-                </div>
-                <div class="form-group">
-                <label for="editPriceInput">Price:</label>
-                <input type="text" class="form-control" id="editWidthInput" value="${res.painting_price}">
-                </div>
-                <div class="form-group">
-                <label for="editArtistInput">Artist:</label>
-                <input type="text" class="form-control" id="editArtistInput" value="${res.artist_id}">
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-                </form>  
+            <form id="editPainting">
+            <div class="form-group">
+              <label for="editpaintingName">Painting Name:</label>
+              <input name="painting_name" type="text" class="form-control" id="editpaintingName" value="${res.painting_name}">
+            </div>
+            <div class="form-group">
+              <label for="editpaintingHeight">Painting Height:</label>
+              <input name="painting_height" type="text" class="form-control" id="editpaintingHeight" value="${res.painting_height}">
+            </div>
+            <div class="form-group">
+              <label for="editpaintingWidth">Painting Width:</label>
+              <input name="painting_width" type="text" class="form-control" id="editpaintingWidth" value="${res.painting_width}">
+            </div>
+            <div class="form-group">
+              <label for="editpaintingPrice">Painting Price:</label>
+              <input name="painting_price" type="text" class="form-control" id="editpaintingPrice" value="${res.painting_price}">
+            </div>
+            <div class="form-group">
+              <label for="editpaintingArtist">Artist Name:</label>
+              <select name="artist_id" class="custom-select mr-sm-2" id="editpaintingArtist">
+                <option selected>Choose...</option>
+              </select>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>  
             </div>`
             var modalFooter = `<div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             </div>`
             $(modalHeader).appendTo("#modalContent")
             $(modalBody).appendTo("#modalContent")
@@ -236,4 +242,31 @@ $("#imagesTestArea").on("click", ".editbtn", async function () {
             console.log(error)
         },
     })
+    $.get(artistURL, function (res) {
+        var artistArray = res.map(function (obj) {
+            return { name: obj.artist_firstName + " " + obj.artist_lastName, value: obj.id };
+        });
+        artists = artistArray;
+        console.log(artists)
+        for (var i = 0; i < artists.length; i++) {
+            $('<option/>').val(artists[i].value).html(artists[i].name).appendTo('#editpaintingArtist');
+        }
+    });
+});
+
+//Edit painting by ID
+$('#editPainting').on("submit", function (event) {
+    event.preventDefault();
+    const editUrl = "http://localhost:3001/api/paintings/" + editId
+    const editId = $("#editBTN").val()
+    const data = new FormData(this);
+    console.log(data)
+
+    // alert(editUrl)
+    // $.ajax({
+    //     type: "PUT",
+    //     url: editUrl,
+    //     dataType: "json",
+    //     data
+    // })
 });
