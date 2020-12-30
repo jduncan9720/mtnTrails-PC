@@ -260,8 +260,8 @@ $('#editModal').on("submit", function (event) {
     event.preventDefault();
     const submitVal = $('#editSubmit').data("paintingvalue")
     const editUrl = "http://localhost:3001/api/paintings/" + submitVal
-    var form = $("#editPainting")[0];
-     var data = new FormData(form);
+    var editForm = $("#editPainting")[0];
+     var data = new FormData(editForm);
     console.log(data)
 
     for (var pair of data.entries()) {
