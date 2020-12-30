@@ -205,7 +205,7 @@ $("#imagesTestArea").on("click", ".editbtn", async function () {
                 <img class="modal-image" id="editImage" src="${res.painting_location}">
             </div>`;
             var modalBody = `<div class="modal-body" id="editForm">
-            <form id="editPainting">
+            <form id="editPainting" name="editPainting">
             <div class="form-group">
               <label for="editpaintingName">Painting Name:</label>
               <input name="painting_name" type="text" class="form-control" id="editpaintingName" value="${res.painting_name}">
@@ -260,8 +260,13 @@ $('#editModal').on("submit", function (event) {
     event.preventDefault();
     const submitVal = $('#editSubmit').data("paintingvalue")
     const editUrl = "http://localhost:3001/api/paintings/" + submitVal
-    console.log(editUrl)
+    var form = $("#editPainting")[0];
+     var data = new FormData(form);
+    console.log(data)
 
+    for (var pair of data.entries()) {
+        console.log(pair[0] + ' ' + pair[1])
+    }
     // alert(editUrl)
     // $.ajax({
     //     type: "PUT",
