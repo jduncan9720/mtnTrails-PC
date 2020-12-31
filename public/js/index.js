@@ -260,18 +260,22 @@ $('#editModal').on("submit", function (event) {
     event.preventDefault();
     const submitVal = $('#editSubmit').data("paintingvalue")
     const editUrl = "http://localhost:3001/api/paintings/" + submitVal
-    var editForm = $("#editPainting")[0];
-     var data = new FormData(editForm);
+    const data = {
+                "painting_name": $('#editpaintingName').val(),
+                "painting_height": $('#editpaintingHeight').val(),
+                "painting_width": $('#editpaintingWidth').val(),
+                "painting_price": $('#editpaintingPrice').val(),
+                "artist_id": $('#editpaintingArtist').val()
+    }
     console.log(data)
 
-    for (var pair of data.entries()) {
-        console.log(pair[0] + ' ' + pair[1])
-    }
-    // alert(editUrl)
-    // $.ajax({
-    //     type: "PUT",
-    //     url: editUrl,
-    //     dataType: "json",
-    //     data
-    // })
+    $.ajax({
+        type: "POST",
+        url: editUrl,
+        data: data,
+        success: console.log("Painting Edited"),
+        error: function (error) {
+            console.log(error)
+        }
+    })
 });

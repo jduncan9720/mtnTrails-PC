@@ -62,7 +62,7 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', uploadFile.single('painting_filename'), async (req, res) => {
     try {
-        console.log(req.body)
+        console.log("body", req.body)
         console.log("fileData", req.file)
         
         req.body.painting_filename = req.file.key
@@ -77,16 +77,17 @@ router.post('/', uploadFile.single('painting_filename'), async (req, res) => {
 });
 
 //EDIT a painting by ID
-router.put('/:id', async (req, res) => {
+router.post('/:id', async (req, res) => {
     try {
-        console.log(req.body)
+        console.log("body", req.body)
+
         const paintingData = await Painting.update(
             {
-                name: req.body.painting_name,
-                height: req.body.painting_height,
-                width: req.body.painting_width,
-                price: req.body.painting_price,
-                artist: req.body.artist_id
+                painting_name: req.body.painting_name,
+                painting_height: req.body.painting_height,
+                painting_width: req.body.painting_width,
+                painting_price: req.body.painting_price,
+                artist_id: req.body.artist_id
             },
             {
                 where: {
@@ -94,9 +95,7 @@ router.put('/:id', async (req, res) => {
                 },
             }
         )
-        .then((updatedPainting) => {
-            res.json(updatedPainting)
-        })
+        res.status(200).json(paintingData)
     } catch (err) {
         res.status(400).json(err);
     }
