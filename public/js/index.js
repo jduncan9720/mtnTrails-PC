@@ -1,6 +1,11 @@
 
 //Get artist to put in drop down.
 let artists;
+//Which images should be displayed
+let painter;
+let sculptor;
+let other;
+
 
 $(document).ready(function () {
     const queryURL = "http://localhost:3001/api/artists"
@@ -103,9 +108,11 @@ $('#newSculpture').on("submit", function (event) {
 $('#getArtistImages').on("submit", function (event) {
     event.preventDefault();
     $('#imagesTestArea').empty()
-    const URL = "http://localhost:3001/api/paintings/"
-    const id = $("#allartist_id").val()
-    const queryURL = URL + id
+    const URL = "http://localhost:3001/api/paintings/";
+    const id = $("#allartist_id").val();
+    artistType(id)
+    //If statement goes here.
+    const queryURL = URL + id;
     console.log(queryURL)
     $.get(queryURL, function (res) {
         console.log(res[0])
@@ -137,6 +144,16 @@ $('#getArtistImages').on("submit", function (event) {
         }
     });
 });
+
+function artistType(id){
+    const queryURL = "http://localhost:3001/api/artists/" + id
+    $.get(queryURL, function (res) {
+        painter = res.artist_painter
+        sculptor = res.artist_sculptor
+        other = res.artist_other
+    });
+
+}
 
 
 $("#imagesTestArea").on("click", ".deletebtn", async function () {
