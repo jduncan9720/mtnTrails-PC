@@ -116,22 +116,15 @@ $('#getArtistImages').on("submit", function (event) {
         for (var i = 0; i < images.length; i++) {
             var imgCardsDiv = $('<div class="card" id="imgCard">')
             var img = $('<img class="card-img-top p-2" alt="Card image">').attr({ "src": images[i].location, "width": 20 })
-            var cardbody = $('<div class="card-body">');
-            var title = $('<p class="card-title">').text("Name: " + images[i].name)
-            var size = $('<p class="card-title">').text("Size: " + images[i].size)
-            var price = $('<p class="card-title">').text("Price: " + images[i].price)
-            var deleteButton = $('<button type="button" class="btn btn-danger deletebtn" id="deleteBTN">DELETE</button>')
-            var editButton = $('<button type="button" class="btn btn-success editbtn" id="editBTN" data-toggle="modal" data-target="#editModal">EDIT</button>')
-            deleteButton.attr("data-deletevalue", images[i].id)
-            editButton.attr("data-editvalue", images[i].id)
-            console.log(deleteButton)
+            var cardBody = $(`<div class="card-body">
+            <p class="card-title">Name: ${images[i].name}</p>
+            <p class="card-title">Size: ${images[i].size}</p>
+            <p class="card-title">Price: ${images[i].price}</p>
+            <button type="button" class="btn btn-danger deletebtn" id="deleteBTN" data-deletevalue="${images[i].id}">DELETE</button>
+            <button type="button" class="btn btn-success editbtn" id="editBTN" data-editvalue="${images[i].id}" data-toggle="modal" data-target="#editModal">EDIT</button>
+            </div>`);
             img.appendTo(imgCardsDiv)
-            title.appendTo(cardbody)
-            size.appendTo(cardbody)
-            price.appendTo(cardbody)
-            deleteButton.appendTo(cardbody)
-            editButton.appendTo(cardbody)
-            cardbody.appendTo(imgCardsDiv)
+            cardBody.appendTo(imgCardsDiv)
             imgCardsDiv.appendTo('#imagesTestArea');
         }
     });
