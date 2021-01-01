@@ -46,12 +46,6 @@ $('#newPainting').on("submit", function (event) {
     for (var pair of data.entries()) {
         console.log(pair[0] + ' ' + pair[1])
     }
-    // const paintingName = $('#paintingName').val()
-    // const paintingHeight = $('#paintingHeight').val()
-    // const paintingWidth = $('#paintingWidth').val()
-    // const paintingPrice = $('#paintingPrice').val()
-    // const paintingArtist = $('#paintingArtist').val()
-    // const paintingFilename = $('#paintingFile').val().match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1]
     console.log($('#paintingFile'))
     const file = ($('#paintingFile')[0].files[0])
 
@@ -79,12 +73,7 @@ $('#newSculpture').on("submit", function (event) {
     for (var pair of data.entries()) {
         console.log(pair[0] + ' ' + pair[1])
     }
-    // const paintingName = $('#paintingName').val()
-    // const paintingHeight = $('#paintingHeight').val()
-    // const paintingWidth = $('#paintingWidth').val()
-    // const paintingPrice = $('#paintingPrice').val()
-    // const paintingArtist = $('#paintingArtist').val()
-    // const paintingFilename = $('#paintingFile').val().match(/[\/\\]([\w\d\s\.\-\(\)]+)$/)[1]
+
     console.log($('#sculptureFile'))
     const file = ($('#sculptureFile')[0].files[0])
 
@@ -144,9 +133,7 @@ $('#getArtistImages').on("submit", function (event) {
             editButton.appendTo(cardbody)
             cardbody.appendTo(imgCardsDiv)
             imgCardsDiv.appendTo('#imagesTestArea');
-            // img.attr('src', images[i].location);
         }
-
     });
 });
 

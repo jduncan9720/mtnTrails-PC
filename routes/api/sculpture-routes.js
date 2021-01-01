@@ -4,6 +4,9 @@ const upload = multer({dest: 'uploads/'})
 const type = upload.single('sculpture_filename')
 const { Artist, Painting, Sculpture } = require('../../models');
 const uploadFile = require('../../upload')
+const deleteFile = require('../../delete')
+
+let sculpturePath = "";
 
 //GET all Sculptures
 router.get('/', async (req, res) => {
@@ -13,25 +16,27 @@ router.get('/', async (req, res) => {
         });
         res.status(200).json(sculptureData);
     } catch (err) {
+        console.log(err)
         res.status(500).json(err)
     }
 });
 
-// //Get Painting by Id
-// router.get('/:id', async (req, res) => {
-//     try {
-//         const sculptureData = await Sculpture.findByPk(req.params.id, {
-//             include: [{ model: Artist}]
-//         });
-//         if (!sculptureData) {
-//             res.status(404).json({ message: "There's no painting with that id!"});
-//             return;
-//         }
-//         res.status(200).json(sculptureData);
-//     } catch (err) {
-//         res.status(500).json(err)
-//     }
-// });
+//Get Sculpture by Id
+router.get('/id/:id', async (req, res) => {
+    try {
+        const sculptureData = await sculpturePath.findByPk(req.params.id, {
+            where: {
+                id: req.params.id,
+            }
+        });
+        res.status(200).json(sculptureData);
+        sculpturePath = sculptureData.sculpture_filename
+        console.log(sculpturePath)
+    } catch (err) {
+        console.log(err)
+        res.status(500).json(err)
+    }
+});
 
 //Get Sculptures by Artist
 
@@ -56,7 +61,7 @@ router.get('/:id', async (req, res) => {
 
 router.post('/', uploadFile.single('sculpture_filename'), async (req, res) => {
     try {
-        console.log(req.body)
+        console.log("body", req.body)
         console.log("fileData", req.file)
         
         req.body.sculpture_filename = req.file.key
@@ -67,6 +72,53 @@ router.post('/', uploadFile.single('sculpture_filename'), async (req, res) => {
     
     } catch (err) {
         res.status(400).json(err);
+    }
+});
+
+//EDIT a sculpture by ID
+
+router.post('/:id', async (req, res) => {
+    try {
+        console.log("body", req.body)
+
+        const sculptureData = await Sculpture.update(
+            {
+                sculpture_name: req.body.sculpture_name,
+                sculpture_height: req.body.sculpture_height,
+                sculpture_width: req.body.sculpture_width,
+                sculpture_depth: req.body.sculpture_depth,
+                sculpture_price: req.body.sculpture_price,
+                artist_id: req.body.artist_id
+            },
+            {
+                where: {
+                    id: req.params.id
+                },
+            }
+        )
+        res.status(200).json(sculptureData)
+    } catch (err) {
+        res.status(400).json(err);
+    }
+})
+
+// DELETE a Painting by ID
+
+router.delete('/:id', async (req, res) => {
+    try {
+        const sculptureData = await Sculpture.destroy({
+            where: {
+                id: req.params.id,
+            }
+        });
+        if (!sculptureData) {
+            res.status(404).json({ message: "There's no painting with that id!" });
+            return;
+        }
+        res.status(200).json(sculptureData);
+        deleteFile(sculpturePath)
+    } catch (err) {
+        res.status(500).json(err)
     }
 });
 

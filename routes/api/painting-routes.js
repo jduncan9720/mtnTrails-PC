@@ -8,7 +8,6 @@ const deleteFile = require('../../delete')
 
 let paintingPath = "";
 
-
 //GET all Paintings
 router.get('/', async (req, res) => {
     try{
@@ -77,6 +76,7 @@ router.post('/', uploadFile.single('painting_filename'), async (req, res) => {
 });
 
 //EDIT a painting by ID
+
 router.post('/:id', async (req, res) => {
     try {
         console.log("body", req.body)
