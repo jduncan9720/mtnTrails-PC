@@ -19,6 +19,18 @@ Artist.init(
         artist_lastName: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        artist_painter: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
+        },
+        artist_sculptor: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
+        },
+        artist_other: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
         }
     },
     {

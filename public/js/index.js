@@ -24,17 +24,23 @@ $('#newArtist').on("submit", function (event) {
     const queryURL = "http://localhost:3001/api/artists"
     const firstName = $('#artistFirstName').val()
     const lastName = $('#artistLastName').val()
+    const painter = $('#painterClick').is(":checked") ? "true" : "false";
+    const sculptor = $('#sculptorClick').is(":checked") ? "true" : "false";
+    const other = $('#otherClick').is(":checked") ? "true" : "false";
     $.ajax({
         type: "POST",
         url: queryURL,
         data: {
             artist_firstName: firstName,
-            artist_lastName: lastName
+            artist_lastName: lastName,
+            artist_painter: painter,
+            artist_sculptor: sculptor,
+            artist_other: other,
         },
         success: console.log("Name added"),
         dataType: "json"
     });
-
+    $("#newArtist").trigger("reset");
 });
 
 $('#newPainting').on("submit", function (event) {
@@ -62,6 +68,7 @@ $('#newPainting').on("submit", function (event) {
             console.log(error)
         }
     });
+    $("#newPainting").trigger("reset");
 });
 
 $('#newSculpture').on("submit", function (event) {
@@ -90,6 +97,7 @@ $('#newSculpture').on("submit", function (event) {
             console.log(error)
         }
     })
+    $("#newSculpture").trigger("reset");
 });
 
 $('#getArtistImages').on("submit", function (event) {
