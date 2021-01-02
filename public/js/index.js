@@ -2,9 +2,9 @@
 //Get artist to put in drop down.
 let artists;
 //Which images should be displayed
-let painter;
-let sculptor;
-let other;
+let switchInfo;
+let switchId;
+let Id;
 
 
 $(document).ready(function () {
@@ -108,53 +108,94 @@ $('#newSculpture').on("submit", function (event) {
 $('#getArtistImages').on("submit", function (event) {
     event.preventDefault();
     $('#imagesTestArea').empty()
-    const URL = "http://localhost:3001/api/paintings/";
-    const id = $("#allartist_id").val();
-    artistType(id)
-    //If statement goes here.
-    const queryURL = URL + id;
-    console.log(queryURL)
-    $.get(queryURL, function (res) {
-        console.log(res[0])
-        var imageArray = res.map(function (obj) {
-            console.log(obj)
-            return {
-                location: obj.painting_location,
-                name: obj.painting_name,
-                size: obj.painting_height + " x " + obj.painting_width,
-                price: obj.painting_price,
-                id: obj.id
-            };
-        });
-        images = imageArray;
-        console.log(images)
-        for (var i = 0; i < images.length; i++) {
-            var imgCardsDiv = $('<div class="card" id="imgCard">')
-            var img = $('<img class="card-img-top p-2" alt="Card image">').attr({ "src": images[i].location, "width": 20 })
-            var cardBody = $(`<div class="card-body">
-            <p class="card-title">Name: ${images[i].name}</p>
-            <p class="card-title">Size: ${images[i].size}</p>
-            <p class="card-title">Price: ${images[i].price}</p>
-            <button type="button" class="btn btn-danger deletebtn" id="deleteBTN" data-deletevalue="${images[i].id}">DELETE</button>
-            <button type="button" class="btn btn-success editbtn" id="editBTN" data-editvalue="${images[i].id}" data-toggle="modal" data-target="#editModal">EDIT</button>
-            </div>`);
-            img.appendTo(imgCardsDiv)
-            cardBody.appendTo(imgCardsDiv)
-            imgCardsDiv.appendTo('#imagesTestArea');
-        }
-    });
+    Id = $("#allartist_id").val();
+    artistType(Id)
 });
 
-function artistType(id){
+function artistType(id) {
     const queryURL = "http://localhost:3001/api/artists/" + id
     $.get(queryURL, function (res) {
-        painter = res.artist_painter
-        sculptor = res.artist_sculptor
-        other = res.artist_other
+        switchInfo = res.artist_painter + " " + res.artist_sculptor + " " + res.artist_other
+        displayImages()
     });
-
 }
 
+function displayImages() {
+    console.log(switchInfo)
+    switch (switchInfo) {
+        case "true false false":
+            console.log("This is a painter")
+            const paintingUrl = "http://localhost:3001/api/paintings/" + Id;
+            console.log(paintingUrl)
+            $.get(paintingUrl, function (res) {
+                console.log(res[0])
+                var imageArray = res.map(function (obj) {
+                    console.log(obj)
+                    return {
+                        location: obj.painting_location,
+                        name: obj.painting_name,
+                        size: obj.painting_height + " x " + obj.painting_width,
+                        price: obj.painting_price,
+                        id: obj.id
+                    };
+                });
+                images = imageArray;
+                console.log(images)
+                for (var i = 0; i < images.length; i++) {
+                    var imgCardsDiv = $('<div class="card" id="imgCard">')
+                    var img = $('<img class="card-img-top p-2" alt="Card image">').attr({ "src": images[i].location, "width": 20 })
+                    var cardBody = $(`<div class="card-body">
+                    <p class="card-title">Name: ${images[i].name}</p>
+                    <p class="card-title">Size: ${images[i].size}</p>
+                    <p class="card-title">Price: ${images[i].price}</p>
+                    <button type="button" class="btn btn-danger deletebtn" id="deleteBTN" data-deletevalue="${images[i].id}">DELETE</button>
+                    <button type="button" class="btn btn-success editbtn" id="editBTN" data-editvalue="${images[i].id}" data-toggle="modal" data-target="#editModal">EDIT</button>
+                    </div>`);
+                    img.appendTo(imgCardsDiv)
+                    cardBody.appendTo(imgCardsDiv)
+                    imgCardsDiv.appendTo('#imagesTestArea');
+                }
+            });
+            break;
+        case "false true false":
+            console.log("This is a sculptor")
+            const sculptureUrl = "http://localhost:3001/api/sculptures/" + Id
+            console.log(sculptureUrl)
+            $.get(sculptureUrl, function (res) {
+                console.log(res[0])
+                var imageArray = res.map(function (obj) {
+                    console.log(obj)
+                    return {
+                        location: obj.sculpture_location,
+                        name: obj.sculpture_name,
+                        size: obj.sculpture_height + " x " + obj.painting_width + " x " + obj.painting_depth,
+                        price: obj.sculpture_price,
+                        id: obj.id
+                    };
+                });
+                images = imageArray;
+                console.log(images)
+                for (var i = 0; i < images.length; i++) {
+                    var imgCardsDiv = $('<div class="card" id="imgCard">')
+                    var img = $('<img class="card-img-top p-2" alt="Card image">').attr({ "src": images[i].location, "width": 20 })
+                    var cardBody = $(`<div class="card-body">
+                    <p class="card-title">Name: ${images[i].name}</p>
+                    <p class="card-title">Size: ${images[i].size}</p>
+                    <p class="card-title">Price: ${images[i].price}</p>
+                    <button type="button" class="btn btn-danger deletebtn" id="deleteBTN" data-deletevalue="${images[i].id}">DELETE</button>
+                    <button type="button" class="btn btn-success editbtn" id="editBTN" data-editvalue="${images[i].id}" data-toggle="modal" data-target="#editModal">EDIT</button>
+                    </div>`);
+                    img.appendTo(imgCardsDiv)
+                    cardBody.appendTo(imgCardsDiv)
+                    imgCardsDiv.appendTo('#imagesTestArea');
+                }
+            });
+            break;
+        case "false false true":
+            console.log("This is a other")
+            break;
+    }
+}
 
 $("#imagesTestArea").on("click", ".deletebtn", async function () {
     buttonVal = $(this).data("deletevalue")
@@ -266,11 +307,11 @@ $('#editModal').on("submit", function (event) {
     const submitVal = $('#editSubmit').data("paintingvalue")
     const editUrl = "http://localhost:3001/api/paintings/" + submitVal
     const data = {
-                "painting_name": $('#editpaintingName').val(),
-                "painting_height": $('#editpaintingHeight').val(),
-                "painting_width": $('#editpaintingWidth').val(),
-                "painting_price": $('#editpaintingPrice').val(),
-                "artist_id": $('#editpaintingArtist').val()
+        "painting_name": $('#editpaintingName').val(),
+        "painting_height": $('#editpaintingHeight').val(),
+        "painting_width": $('#editpaintingWidth').val(),
+        "painting_price": $('#editpaintingPrice').val(),
+        "artist_id": $('#editpaintingArtist').val()
     }
     console.log(data)
 
