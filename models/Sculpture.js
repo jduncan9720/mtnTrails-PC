@@ -12,6 +12,10 @@ Sculpture.init(
             primaryKey: true,
             autoIncrement: true,
         },
+        art_type: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         sculpture_name: {
             type: DataTypes.STRING,
             allowNull: false,

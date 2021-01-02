@@ -12,6 +12,10 @@ Painting.init(
             primaryKey: true,
             autoIncrement: true,
         },
+        art_type: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         painting_name: {
             type: DataTypes.STRING,
             allowNull: false,

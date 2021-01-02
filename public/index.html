@@ -35,7 +35,6 @@
             <label for="sculptorClick">Sculptor</label><br>
             <input type="checkbox" id="otherClick" name="artist_other" value="false">
             <label for="otherClick">Other</label>
-          </select>
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
       </form>
@@ -46,6 +45,9 @@
         <div class="container">
           <h2>Add New Painting:</h2>
           <form id="newPainting">
+            <div class="form-group">
+              <input name="art_type" type="hidden" value="painting">
+            </div>
             <div class="form-group">
               <label for="paintingName">Painting Name:</label>
               <input name="painting_name" type="text" class="form-control" id="paintingName"
@@ -95,6 +97,9 @@
         <div class="container">
           <h2>Add New Sculpture:</h2>
           <form id="newSculpture">
+            <div class="form-group">
+              <input name="art_type" type="hidden" value="sculpture">
+            </div>
             <div class="form-group">
               <label for="sculptureName">Sculpture Name:</label>
               <input name="sculpture_name" type="text" class="form-control" id="sculptureName"

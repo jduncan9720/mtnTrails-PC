@@ -2,6 +2,7 @@ const { Painting } = require('../models');
 
 const paintingData = [
     {
+        art_type: "painting",
         painting_name: 'Stoic',
         painting_height: 30.00,
         painting_width: 40.00,
@@ -11,6 +12,7 @@ const paintingData = [
         painting_location: "https://mtgartworkbucket.s3.amazonaws.com/1609532544018-Stoic.jpg"
     },
     {
+        art_type: "painting",
         painting_name: 'A Pathway to Wonder',
         painting_height: 32.25,
         painting_width: 44.75,
@@ -20,6 +22,7 @@ const paintingData = [
         painting_location: "https://mtgartworkbucket.s3.us-east-2.amazonaws.com/1609532572575-A%20Pathway%20to%20Wonder.jpg"
     },
     {
+        art_type: "painting",
         painting_name: 'Knowing',
         painting_height: 20.00,
         painting_width: 24.00,
@@ -29,6 +32,7 @@ const paintingData = [
         painting_location: "https://mtgartworkbucket.s3.us-east-2.amazonaws.com/1609532616999-Knowing.jpg"
     },
     {
+        art_type: "painting",
         painting_name: 'Criss Cross',
         painting_height: 22.00,
         painting_width: 30.50,
@@ -38,6 +42,7 @@ const paintingData = [
         painting_location: "https://mtgartworkbucket.s3.us-east-2.amazonaws.com/1609532639613-Crisscross-24x30.jpeg"
     },
     {
+        art_type: "painting",
         painting_name: 'Two Sentinels',
         painting_height: 22.00,
         painting_width: 30.50,
@@ -47,6 +52,7 @@ const paintingData = [
         painting_location: "https://mtgartworkbucket.s3.us-east-2.amazonaws.com/1609532670506-Two-Sentinels-12x16.jpg"
     },
     {
+        art_type: "painting",
         painting_name: 'Fall Harvest',
         painting_height: 22.00,
         painting_width: 30.50,
@@ -56,6 +62,7 @@ const paintingData = [
         painting_location: "https://mtgartworkbucket.s3.us-east-2.amazonaws.com/1609532764570-Fall-Harvest-36x48.jpg"
     },
     {
+        art_type: "painting",
         painting_name: 'Red Butte',
         painting_height: 12.00,
         painting_width: 16.00,
@@ -65,6 +72,7 @@ const paintingData = [
         painting_location: "https://mtgartworkbucket.s3.us-east-2.amazonaws.com/1609533061560-Red-Butte-40x30.jpg"
     },
     {
+        art_type: "painting",
         painting_name: 'Crow Lodge',
         painting_height: 60.00,
         painting_width: 40.00,
@@ -74,6 +82,7 @@ const paintingData = [
         painting_location: "https://mtgartworkbucket.s3.us-east-2.amazonaws.com/1609533100561-Crow-Lodge-26x22.jpg"
     },
     {
+        art_type: "painting",
         painting_name: 'Bison Skull Lodge',
         painting_height: 60.00,
         painting_width: 40.00,

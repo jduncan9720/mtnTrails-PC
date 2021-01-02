@@ -243,7 +243,7 @@ $("#imagesTestArea").on("click", ".deletebtn", async function () {
             delFileName = res.painting_filename;
             console.log(delFileName)
         }
-        //AWS s3 delete runs through the painitng_routes
+        //AWS s3 delete runs through the painting_routes
     });
 
     //Delete painting from the database

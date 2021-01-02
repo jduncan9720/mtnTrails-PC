@@ -2,6 +2,7 @@ const { Sculpture } = require('../models');
 
 const sculptureData = [
     {
+        art_type: "sculpture",
         sculpture_name: 'Tall Tales',
         sculpture_height: 12.00,
         sculpture_width: 14.00,
@@ -12,6 +13,7 @@ const sculptureData = [
         sculpture_location: "https://mtgartworkbucket.s3.us-east-2.amazonaws.com/1609533199754-Tall-Tails.jpg"
     },
     {
+        art_type: "sculpture",
         sculpture_name: 'Noble Heart',
         sculpture_height: 20.00,
         sculpture_width: 12.00,
@@ -22,6 +24,7 @@ const sculptureData = [
         sculpture_location: "https://mtgartworkbucket.s3.us-east-2.amazonaws.com/1609533235734-noble-heart.jpg"
     },
     {
+        art_type: "sculpture",
         sculpture_name: 'Micestroni',
         sculpture_height: 22.00,
         sculpture_width: 22.75,
@@ -32,6 +35,7 @@ const sculptureData = [
         sculpture_location: "https://mtgartworkbucket.s3.us-east-2.amazonaws.com/1609533276458-MiceEstroni.jpg"
     },
     {
+        art_type: "sculpture",
         sculpture_name: 'Truffles',
         sculpture_height: 20.00,
         sculpture_width: 8.25,
