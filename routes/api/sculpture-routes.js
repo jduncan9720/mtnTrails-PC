@@ -24,7 +24,7 @@ router.get('/', async (req, res) => {
 //Get Sculpture by Id
 router.get('/id/:id', async (req, res) => {
     try {
-        const sculptureData = await sculpturePath.findByPk(req.params.id, {
+        const sculptureData = await Sculpture.findByPk(req.params.id, {
             where: {
                 id: req.params.id,
             }
@@ -112,7 +112,7 @@ router.delete('/:id', async (req, res) => {
             }
         });
         if (!sculptureData) {
-            res.status(404).json({ message: "There's no painting with that id!" });
+            res.status(404).json({ message: "There's no sculpture with that id!" });
             return;
         }
         res.status(200).json(sculptureData);

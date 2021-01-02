@@ -232,34 +232,67 @@ function displayImages() {
     }
 }
 
-//Delete a painting
+//Delete a painting or sculpture
 $("#imagesTestArea").on("click", ".deletebtn", async function () {
     buttonVal = $(this).data("deletevalue")
-    fileURL = "http://localhost:3001/api/paintings/id/" + buttonVal
-    console.log(fileURL)
-    var delFileName;
-    //Get painting filename for delete
-    $.ajax({
-        type: "GET",
-        url: fileURL,
-        dataType: "json",
-        success: function (res) {
-            delFileName = res.painting_filename;
-            console.log(delFileName)
-        }
-        //AWS s3 delete runs through the painting_routes
-    });
+    switch ($(this).data("arttype")) {
+        case "painting":
+            fileURL = "http://localhost:3001/api/paintings/id/" + buttonVal
+            console.log(fileURL)
+            var delFileName;
+            //Get painting filename for delete
+            $.ajax({
+                type: "GET",
+                url: fileURL,
+                dataType: "json",
+                success: function (res) {
+                    delFileName = res.painting_filename;
+                    console.log(delFileName)
+                }
+                //AWS s3 delete runs through the painting_routes
+            });
 
-    //Delete painting from the database
-    var queryURL = "http://localhost:3001/api/paintings/" + buttonVal
-    $.ajax({
-        url: queryURL,
-        type: 'DELETE',
-        success: console.log("Painting Deleted!"),
-        error: function (error) {
-            console.log(error)
-        }
-    });
+            //Delete painting from the database
+            var queryURL = "http://localhost:3001/api/paintings/" + buttonVal
+            $.ajax({
+                url: queryURL,
+                type: 'DELETE',
+                success: console.log("Painting Deleted!"),
+                error: function (error) {
+                    console.log(error)
+                }
+            });
+
+            break;
+        case "sculpture":
+            case "sculpture":
+            fileURL = "http://localhost:3001/api/sculptures/id/" + buttonVal
+            console.log(fileURL)
+            var delFileName;
+            //Get painting filename for delete
+            $.ajax({
+                type: "GET",
+                url: fileURL,
+                dataType: "json",
+                success: function (res) {
+                    delFileName = res.sculpture_filename;
+                    console.log(delFileName)
+                }
+                //AWS s3 delete runs through the painting_routes
+            });
+
+            //Delete painting from the database
+            var queryURL = "http://localhost:3001/api/sculptures/" + buttonVal
+            $.ajax({
+                url: queryURL,
+                type: 'DELETE',
+                success: console.log("Sculpture Deleted!"),
+                error: function (error) {
+                    console.log(error)
+                }
+            });
+            break;
+    }
 
 });
 
