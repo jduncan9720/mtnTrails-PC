@@ -1,4 +1,3 @@
-
 //Get artist to put in drop down.
 let artists;
 //Which images should be displayed
@@ -6,7 +5,7 @@ let switchInfo;
 let switchId;
 let Id;
 
-
+//Pulls all artists names for dropdowns
 $(document).ready(function () {
     const queryURL = "http://localhost:3001/api/artists"
     $.get(queryURL, function (res) {
@@ -23,7 +22,7 @@ $(document).ready(function () {
     });
 });
 
-//Create a new artist from form.
+//Create a new artist from form
 $('#newArtist').on("submit", function (event) {
     event.preventDefault();
     const queryURL = "http://localhost:3001/api/artists"
@@ -48,6 +47,7 @@ $('#newArtist').on("submit", function (event) {
     $("#newArtist").trigger("reset");
 });
 
+//Creates a new painting from form
 $('#newPainting').on("submit", function (event) {
     event.preventDefault();
     const queryURL = "http://localhost:3001/api/paintings"
@@ -76,6 +76,7 @@ $('#newPainting').on("submit", function (event) {
     $("#newPainting").trigger("reset");
 });
 
+//Creates a new sculpture from form
 $('#newSculpture').on("submit", function (event) {
     event.preventDefault();
     const queryURL = "http://localhost:3001/api/sculptures"
@@ -105,6 +106,7 @@ $('#newSculpture').on("submit", function (event) {
     $("#newSculpture").trigger("reset");
 });
 
+//Submit dropdown list selection and get switchInfo to switch which images to display
 $('#getArtistImages').on("submit", function (event) {
     event.preventDefault();
     $('#imagesTestArea').empty()
@@ -112,6 +114,7 @@ $('#getArtistImages').on("submit", function (event) {
     artistType(Id)
 });
 
+//Take the selected artists id and show what kind of artist for switch case
 function artistType(id) {
     const queryURL = "http://localhost:3001/api/artists/" + id
     $.get(queryURL, function (res) {
@@ -120,6 +123,7 @@ function artistType(id) {
     });
 }
 
+//Use switchInfo to show proper images
 function displayImages() {
     console.log(switchInfo)
     switch (switchInfo) {
@@ -196,7 +200,7 @@ function displayImages() {
             break;
     }
 }
-
+//Delete a painting
 $("#imagesTestArea").on("click", ".deletebtn", async function () {
     buttonVal = $(this).data("deletevalue")
     fileURL = "http://localhost:3001/api/paintings/id/" + buttonVal
