@@ -1,5 +1,6 @@
 //Get artist to put in drop down.
 let artists;
+let images;
 //Which images should be displayed
 let switchInfo;
 let switchId;
@@ -145,20 +146,7 @@ function displayImages() {
                 });
                 images = imageArray;
                 console.log(images)
-                for (var i = 0; i < images.length; i++) {
-                    var imgCardsDiv = $('<div class="card" id="imgCard">')
-                    var img = $('<img class="card-img-top p-2" alt="Card image">').attr({ "src": images[i].location, "width": 20 })
-                    var cardBody = $(`<div class="card-body">
-                    <p class="card-title">Name: ${images[i].name}</p>
-                    <p class="card-title">Size: ${images[i].size}</p>
-                    <p class="card-title">Price: ${images[i].price}</p>
-                    <button type="button" class="btn btn-danger deletebtn" id="deleteBTN" data-deletevalue="${images[i].id}">DELETE</button>
-                    <button type="button" class="btn btn-success editbtn" id="editBTN" data-editvalue="${images[i].id}" data-toggle="modal" data-target="#editModal">EDIT</button>
-                    </div>`);
-                    img.appendTo(imgCardsDiv)
-                    cardBody.appendTo(imgCardsDiv)
-                    imgCardsDiv.appendTo('#imagesTestArea');
-                }
+                layoutImages()
             });
             break;
         case "false true false":
@@ -172,34 +160,39 @@ function displayImages() {
                     return {
                         location: obj.sculpture_location,
                         name: obj.sculpture_name,
-                        size: obj.sculpture_height + " x " + obj.painting_width + " x " + obj.painting_depth,
+                        size: obj.sculpture_height + " x " + obj.sculpture_width + " x " + obj.sculpture_depth,
                         price: obj.sculpture_price,
                         id: obj.id
                     };
                 });
                 images = imageArray;
                 console.log(images)
-                for (var i = 0; i < images.length; i++) {
-                    var imgCardsDiv = $('<div class="card" id="imgCard">')
-                    var img = $('<img class="card-img-top p-2" alt="Card image">').attr({ "src": images[i].location, "width": 20 })
-                    var cardBody = $(`<div class="card-body">
-                    <p class="card-title">Name: ${images[i].name}</p>
-                    <p class="card-title">Size: ${images[i].size}</p>
-                    <p class="card-title">Price: ${images[i].price}</p>
-                    <button type="button" class="btn btn-danger deletebtn" id="deleteBTN" data-deletevalue="${images[i].id}">DELETE</button>
-                    <button type="button" class="btn btn-success editbtn" id="editBTN" data-editvalue="${images[i].id}" data-toggle="modal" data-target="#editModal">EDIT</button>
-                    </div>`);
-                    img.appendTo(imgCardsDiv)
-                    cardBody.appendTo(imgCardsDiv)
-                    imgCardsDiv.appendTo('#imagesTestArea');
-                }
+                layoutImages()
             });
             break;
         case "false false true":
             console.log("This is a other")
             break;
     }
+    //Reuse below code to create cards based on switch
+    function layoutImages(){
+        for (var i = 0; i < images.length; i++) {
+            var imgCardsDiv = $('<div class="card" id="imgCard">')
+            var img = $('<img class="card-img-top p-2" alt="Card image">').attr({ "src": images[i].location, "width": 20 })
+            var cardBody = $(`<div class="card-body">
+            <p class="card-title">Name: ${images[i].name}</p>
+            <p class="card-title">Size: ${images[i].size}</p>
+            <p class="card-title">Price: ${images[i].price}</p>
+            <button type="button" class="btn btn-danger deletebtn" id="deleteBTN" data-deletevalue="${images[i].id}">DELETE</button>
+            <button type="button" class="btn btn-success editbtn" id="editBTN" data-editvalue="${images[i].id}" data-toggle="modal" data-target="#editModal">EDIT</button>
+            </div>`);
+            img.appendTo(imgCardsDiv)
+            cardBody.appendTo(imgCardsDiv)
+            imgCardsDiv.appendTo('#imagesTestArea');
+        }
+    }
 }
+
 //Delete a painting
 $("#imagesTestArea").on("click", ".deletebtn", async function () {
     buttonVal = $(this).data("deletevalue")
