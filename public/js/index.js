@@ -142,6 +142,7 @@ function displayImages() {
                         name: obj.painting_name,
                         size: obj.painting_height + " x " + obj.painting_width,
                         price: obj.painting_price,
+                        type: obj.art_type,
                         id: obj.id
                     };
                 });
@@ -162,6 +163,7 @@ function displayImages() {
                         name: obj.sculpture_name,
                         size: obj.sculpture_height + " x " + obj.sculpture_width + " x " + obj.sculpture_depth,
                         price: obj.sculpture_price,
+                        type: obj.art_type,
                         id: obj.id
                     };
                 });
@@ -184,6 +186,7 @@ function displayImages() {
                         name: obj.painting_name,
                         size: obj.painting_height + " x " + obj.painting_width,
                         price: obj.painting_price,
+                        type: obj.art_type,
                         id: obj.id
                     };
                 });
@@ -200,6 +203,7 @@ function displayImages() {
                         name: obj.sculpture_name,
                         size: obj.sculpture_height + " x " + obj.sculpture_width + " x " + obj.sculpture_depth,
                         price: obj.sculpture_price,
+                        type: obj.art_type,
                         id: obj.id
                     };
                 });
@@ -218,8 +222,8 @@ function displayImages() {
             <p class="card-title">Name: ${images[i].name}</p>
             <p class="card-title">Size: ${images[i].size}</p>
             <p class="card-title">Price: ${images[i].price}</p>
-            <button type="button" class="btn btn-danger deletebtn" id="deleteBTN" data-deletevalue="${images[i].id}">DELETE</button>
-            <button type="button" class="btn btn-success editbtn" id="editBTN" data-editvalue="${images[i].id}" data-toggle="modal" data-target="#editModal">EDIT</button>
+            <button type="button" class="btn btn-danger deletebtn" id="deleteBTN" data-arttype="${images[i].type}" data-deletevalue="${images[i].id}">DELETE</button>
+            <button type="button" class="btn btn-success editbtn" id="editBTN" data-arttype="${images[i].type}" data-editvalue="${images[i].id}" data-toggle="modal" data-target="#editModal">EDIT</button>
             </div>`);
             img.appendTo(imgCardsDiv)
             cardBody.appendTo(imgCardsDiv)

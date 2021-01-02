@@ -7,9 +7,9 @@ const paintingData = [
         painting_height: 30.00,
         painting_width: 40.00,
         painting_price: 14000.00,
-        painting_filename: "1609532544018-Stoic.jpg",
+        painting_filename: "1609620042786-Stoic.jpg",
         artist_id: 1,
-        painting_location: "https://mtgartworkbucket.s3.amazonaws.com/1609532544018-Stoic.jpg"
+        painting_location: "https://mtgartworkbucket.s3.us-east-2.amazonaws.com/1609620042786-Stoic.jpg"
     },
     {
         art_type: "painting",
