@@ -127,10 +127,11 @@ function artistType(id) {
 //Use switchInfo to show proper images
 function displayImages() {
     console.log(switchInfo)
+    const paintingUrl = "http://localhost:3001/api/paintings/" + Id;
+    const sculptureUrl = "http://localhost:3001/api/sculptures/" + Id
     switch (switchInfo) {
         case "true false false":
             console.log("This is a painter")
-            const paintingUrl = "http://localhost:3001/api/paintings/" + Id;
             console.log(paintingUrl)
             $.get(paintingUrl, function (res) {
                 console.log(res[0])
@@ -151,7 +152,6 @@ function displayImages() {
             break;
         case "false true false":
             console.log("This is a sculptor")
-            const sculptureUrl = "http://localhost:3001/api/sculptures/" + Id
             console.log(sculptureUrl)
             $.get(sculptureUrl, function (res) {
                 console.log(res[0])
@@ -173,9 +173,44 @@ function displayImages() {
         case "false false true":
             console.log("This is a other")
             break;
+        case "true true false":
+            console.log("This is a painter/sculptor")
+            $.get(paintingUrl, function (res) {
+                console.log(res[0])
+                var imageArray = res.map(function (obj) {
+                    console.log(obj)
+                    return {
+                        location: obj.painting_location,
+                        name: obj.painting_name,
+                        size: obj.painting_height + " x " + obj.painting_width,
+                        price: obj.painting_price,
+                        id: obj.id
+                    };
+                });
+                images = imageArray;
+                console.log(images)
+                layoutImages()
+            });
+            $.get(sculptureUrl, function (res) {
+                console.log(res[0])
+                var imageArray = res.map(function (obj) {
+                    console.log(obj)
+                    return {
+                        location: obj.sculpture_location,
+                        name: obj.sculpture_name,
+                        size: obj.sculpture_height + " x " + obj.sculpture_width + " x " + obj.sculpture_depth,
+                        price: obj.sculpture_price,
+                        id: obj.id
+                    };
+                });
+                images = imageArray;
+                console.log(images)
+                layoutImages()
+            });
+            break;
     }
     //Reuse below code to create cards based on switch
-    function layoutImages(){
+    function layoutImages() {
         for (var i = 0; i < images.length; i++) {
             var imgCardsDiv = $('<div class="card" id="imgCard">')
             var img = $('<img class="card-img-top p-2" alt="Card image">').attr({ "src": images[i].location, "width": 20 })
@@ -224,7 +259,7 @@ $("#imagesTestArea").on("click", ".deletebtn", async function () {
 
 });
 
-//Edit Button
+//Edit Button and Modal
 $("#imagesTestArea").on("click", ".editbtn", async function () {
     $("#modalContent").empty()
 
