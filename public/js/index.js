@@ -262,10 +262,8 @@ $("#imagesTestArea").on("click", ".deletebtn", async function () {
                     console.log(error)
                 }
             });
-
             break;
         case "sculpture":
-            case "sculpture":
             fileURL = "http://localhost:3001/api/sculptures/id/" + buttonVal
             console.log(fileURL)
             var delFileName;
@@ -292,6 +290,9 @@ $("#imagesTestArea").on("click", ".deletebtn", async function () {
                 }
             });
             break;
+        case "other":
+            alert("Need to do this")
+            break;
     }
 
 });
@@ -299,27 +300,28 @@ $("#imagesTestArea").on("click", ".deletebtn", async function () {
 //Edit Button and Modal
 $("#imagesTestArea").on("click", ".editbtn", async function () {
     $("#modalContent").empty()
-
     const artistURL = "http://localhost:3001/api/artists"
     buttonVal = $(this).data("editvalue")
-    queryURL = "http://localhost:3001/api/paintings/id/" + buttonVal
-    console.log(queryURL)
-    $.ajax({
-        url: queryURL,
-        type: 'GET',
-        dataType: 'json',
-        success: function (res) {
-            console.log(res.id)
-            console.log(res.painting_name)
-            console.log(res.painting_height)
-            console.log(res.painting_width)
-            console.log(res.painting_price)
-            console.log(res.artist_id)
-            console.log(res.painting_location)
-            var modalHeader = `<div class="modal-header">
+    switch ($(this).data("arttype")) {
+        case "painting":
+            queryURL = "http://localhost:3001/api/paintings/id/" + buttonVal
+            console.log(queryURL)
+            $.ajax({
+                url: queryURL,
+                type: 'GET',
+                dataType: 'json',
+                success: function (res) {
+                    console.log(res.id)
+                    console.log(res.painting_name)
+                    console.log(res.painting_height)
+                    console.log(res.painting_width)
+                    console.log(res.painting_price)
+                    console.log(res.artist_id)
+                    console.log(res.painting_location)
+                    var modalHeader = `<div class="modal-header">
                 <img class="modal-image" id="editImage" src="${res.painting_location}">
             </div>`;
-            var modalBody = `<div class="modal-body" id="editForm">
+                    var modalBody = `<div class="modal-body" id="editForm">
             <form id="editPainting" name="editPainting">
             <div class="form-group">
               <label for="editpaintingName">Painting Name:</label>
@@ -344,53 +346,163 @@ $("#imagesTestArea").on("click", ".editbtn", async function () {
               </select>
             </div>
             <br>
-            <button type="submit" class="btn btn-primary" id="editSubmit" data-paintingvalue="${res.id}">Submit</button>
+            <button type="submit" class="btn btn-primary" id="editSubmit" data-arttype="${res.art_type}" data-paintingvalue="${res.id}">Submit</button>
           </form>  
             </div>`
-            var modalFooter = `<div class="modal-footer">
+                    var modalFooter = `<div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
             </div>`
-            $(modalHeader).appendTo("#modalContent")
-            $(modalBody).appendTo("#modalContent")
-            $(modalFooter).appendTo("#modalContent")
-        },
-        error: function (error) {
-            console.log(error)
-        },
-    })
-    $.get(artistURL, function (res) {
-        var artistArray = res.map(function (obj) {
-            return { name: obj.artist_firstName + " " + obj.artist_lastName, value: obj.id };
-        });
-        artists = artistArray;
-        console.log(artists)
-        for (var i = 0; i < artists.length; i++) {
-            $('<option/>').val(artists[i].value).html(artists[i].name).appendTo('#editpaintingArtist');
-        }
-    });
+                    $(modalHeader).appendTo("#modalContent")
+                    $(modalBody).appendTo("#modalContent")
+                    $(modalFooter).appendTo("#modalContent")
+                },
+                error: function (error) {
+                    console.log(error)
+                },
+            })
+            $.get(artistURL, function (res) {
+                var artistArray = res.map(function (obj) {
+                    return { name: obj.artist_firstName + " " + obj.artist_lastName, value: obj.id };
+                });
+                artists = artistArray;
+                console.log(artists)
+                for (var i = 0; i < artists.length; i++) {
+                    $('<option/>').val(artists[i].value).html(artists[i].name).appendTo('#editpaintingArtist');
+                }
+            });
+            break;
+        case "sculpture":
+            queryURL = "http://localhost:3001/api/sculptures/id/" + buttonVal
+            console.log(queryURL)
+            $.ajax({
+                url: queryURL,
+                type: 'GET',
+                dataType: 'json',
+                success: function (res) {
+                    console.log(res.id)
+                    console.log(res.sculpture_name)
+                    console.log(res.sculpture_height)
+                    console.log(res.sculpture_width)
+                    console.log(res.sculpture_depth)
+                    console.log(res.sculpture_price)
+                    console.log(res.artist_id)
+                    console.log(res.sculpture_location)
+                    var modalHeader = `<div class="modal-header">
+                <img class="modal-image" id="editImage" src="${res.sculpture_location}">
+            </div>`;
+                    var modalBody = `<div class="modal-body" id="editForm">
+            <form id="editSculpture" name="editSculpture">
+            <div class="form-group">
+              <label for="editsculptureName">Sculpture Name:</label>
+              <input name="sculpture_name" type="text" class="form-control" id="editsculptureName" value="${res.sculpture_name}">
+            </div>
+            <div class="form-group">
+              <label for="editsculptureHeight">Sculpture Height:</label>
+              <input name="sculpture_height" type="text" class="form-control" id="editsculptureHeight" value="${res.sculpture_height}">
+            </div>
+            <div class="form-group">
+              <label for="editsculptureWidth">Sculpture Width:</label>
+              <input name="sculpture_width" type="text" class="form-control" id="editsculptureWidth" value="${res.sculpture_width}">
+            </div>
+            <div class="form-group">
+              <label for="editsculptureDepth">Sculpture Depth:</label>
+              <input name="sculpture_depth" type="text" class="form-control" id="editsculptureDepth" value="${res.sculpture_depth}">
+            </div>
+            <div class="form-group">
+              <label for="editsculpturePrice">Sculpture Price:</label>
+              <input name="sculpture_price" type="text" class="form-control" id="editsculpturePrice" value="${res.sculpture_price}">
+            </div>
+            <div class="form-group">
+              <label for="editsculptureArtist">Sculpture Name:</label>
+              <select name="artist_id" class="custom-select mr-sm-2" id="editsculptureArtist">
+                <option selected>Choose...</option>
+              </select>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary" id="editSubmit" data-arttype="${res.art_type}" data-sculpturevalue="${res.id}">Submit</button>
+          </form>  
+            </div>`
+                    var modalFooter = `<div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>`
+                    $(modalHeader).appendTo("#modalContent")
+                    $(modalBody).appendTo("#modalContent")
+                    $(modalFooter).appendTo("#modalContent")
+                },
+                error: function (error) {
+                    console.log(error)
+                },
+            })
+            $.get(artistURL, function (res) {
+                var artistArray = res.map(function (obj) {
+                    return { name: obj.artist_firstName + " " + obj.artist_lastName, value: obj.id };
+                });
+                artists = artistArray;
+                console.log(artists)
+                for (var i = 0; i < artists.length; i++) {
+                    $('<option/>').val(artists[i].value).html(artists[i].name).appendTo('#editsculptureArtist');
+                }
+            });
+            break;
+        case "other":
+            alert("Need to finish this")
+            break;
+    }
+
 });
 
 //Edit painting by ID
 $('#editModal').on("submit", function (event) {
     event.preventDefault();
-    const submitVal = $('#editSubmit').data("paintingvalue")
-    const editUrl = "http://localhost:3001/api/paintings/" + submitVal
-    const data = {
-        "painting_name": $('#editpaintingName').val(),
-        "painting_height": $('#editpaintingHeight').val(),
-        "painting_width": $('#editpaintingWidth').val(),
-        "painting_price": $('#editpaintingPrice').val(),
-        "artist_id": $('#editpaintingArtist').val()
-    }
-    console.log(data)
+    switch ($("#editSubmit").data("arttype")) {
+        case "painting":
+            const submitPaintVal = $('#editSubmit').data("paintingvalue")
+            const editPaintUrl = "http://localhost:3001/api/paintings/" + submitPaintVal
+            const paintData = {
+                "painting_name": $('#editpaintingName').val(),
+                "painting_height": $('#editpaintingHeight').val(),
+                "painting_width": $('#editpaintingWidth').val(),
+                "painting_price": $('#editpaintingPrice').val(),
+                "artist_id": $('#editpaintingArtist').val()
+            }
+            console.log(paintData)
 
-    $.ajax({
-        type: "POST",
-        url: editUrl,
-        data: data,
-        success: console.log("Painting Edited"),
-        error: function (error) {
-            console.log(error)
-        }
-    })
+            $.ajax({
+                type: "POST",
+                url: editPaintUrl,
+                data: paintData,
+                success: console.log("Painting Edited"),
+                error: function (error) {
+                    console.log(error)
+                }
+            })
+            break;
+        case "sculpture":
+            const submitSculptVal = $('#editSubmit').data("sculpturevalue")
+            const editSculptUrl = "http://localhost:3001/api/sculptures/" + submitSculptVal
+            const sculptData = {
+                "sculpture_name": $('#editsculptureName').val(),
+                "sculpture_height": $('#editsculptureHeight').val(),
+                "sculpture_width": $('#editsculptureWidth').val(),
+                "sculpture_depth": $('#editsculptureDepth').val(),
+                "sculpture_price": $('#editsculpturePrice').val(),
+                "artist_id": $('#editsculptureArtist').val()
+            }
+            console.log(sculptData)
+
+            $.ajax({
+                type: "POST",
+                url: editSculptUrl,
+                data: sculptData,
+                success: console.log("Sculpture Edited"),
+                error: function (error) {
+                    console.log(error)
+                }
+            })
+            break;
+        case "other":
+            alert("still need to fix this")
+            break;
+
+    }
 });
