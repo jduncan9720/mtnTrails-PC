@@ -48,6 +48,6 @@ const sculptureData = [
     
 ];
 
-const seedsculptures = () => Sculpture.bulkCreate(sculptureData);
+const seedSculptures = () => Sculpture.bulkCreate(sculptureData);
 
-module.exports = seedsculptures;
+module.exports = seedSculptures;

@@ -41,7 +41,7 @@
     </div>
     <hr>
     <div class="row">
-      <div class="col-lg-6">
+      <div class="col-lg-4">
         <div class="container">
           <h2>Add New Painting:</h2>
           <form id="newPainting">
@@ -93,7 +93,7 @@
           </form>
         </div>
       </div>
-      <div class="col-lg-6">
+      <div class="col-lg-4">
         <div class="container">
           <h2>Add New Sculpture:</h2>
           <form id="newSculpture">
@@ -134,6 +134,53 @@
             <div class="form-group">
               <label for="sculptureFile">Upload Image:</label>
               <input name="sculpture_filename" type="file" class="form-control-file" id="sculptureFile">
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+          </form>
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="container">
+          <h2>Add New Other:</h2>
+          <form id="newOther">
+            <div class="form-group">
+              <input name="art_type" type="hidden" value="other">
+            </div>
+            <div class="form-group">
+              <label for="otherName">Other Name:</label>
+              <input name="other_name" type="text" class="form-control" id="otherName"
+                placeholder="Other Name....">
+            </div>
+            <div class="form-group">
+              <label for="otherHeight">Other Height:</label>
+              <input name="other_height" type="text" class="form-control" id="otherHeight"
+                placeholder="Height in inches....">
+            </div>
+            <div class="form-group">
+              <label for="otherWidth">Other Width:</label>
+              <input name="other_width" type="text" class="form-control" id="otherWidth"
+                placeholder="Width in inches....">
+            </div>
+            <div class="form-group">
+              <label for="otherDepth">Other Depth:</label>
+              <input name="other_depth" type="text" class="form-control" id="otherDepth"
+                placeholder="Depth in inches....">
+            </div>
+            <div class="form-group">
+              <label for="otherPrice">Other Price:</label>
+              <input name="other_price" type="text" class="form-control" id="otherPrice"
+                placeholder="Price....">
+            </div>
+            <div class="form-group">
+              <label for="otherArtist">Artist Name:</label>
+              <select name="artist_id" class="custom-select mr-sm-2" id="Oartist_id">
+                <option selected>Choose...</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="otherFile">Upload Image:</label>
+              <input name="other_filename" type="file" class="form-control-file" id="otherFile">
             </div>
             <br>
             <button type="submit" class="btn btn-primary">Submit</button>

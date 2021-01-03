@@ -18,6 +18,7 @@ $(document).ready(function () {
         for (var i = 0; i < artists.length; i++) {
             $('<option/>').val(artists[i].value).html(artists[i].name).appendTo('#artist_id');
             $('<option/>').val(artists[i].value).html(artists[i].name).appendTo('#Sartist_id');
+            $('<option/>').val(artists[i].value).html(artists[i].name).appendTo('#Oartist_id');
             $('<option/>').val(artists[i].value).html(artists[i].name).appendTo('#allartist_id');
         }
     });
@@ -107,6 +108,36 @@ $('#newSculpture').on("submit", function (event) {
     $("#newSculpture").trigger("reset");
 });
 
+//Creates a new Other from form
+$('#newOther').on("submit", function (event) {
+    event.preventDefault();
+    const queryURL = "http://localhost:3001/api/others"
+    const data = new FormData(this);
+    console.log(data)
+
+    for (var pair of data.entries()) {
+        console.log(pair[0] + ' ' + pair[1])
+    }
+
+    console.log($('#otherFile'))
+    const file = ($('#otherFile')[0].files[0])
+
+    $.ajax({
+        type: "POST",
+        dataType: "json",
+        processData: false,
+        contentType: false,
+        url: queryURL,
+        enctype: "multipart/form-data",
+        data: data,
+        success: console.log("Other added"),
+        error: function (error) {
+            console.log(error)
+        }
+    })
+    $("#newOther").trigger("reset");
+});
+
 //Submit dropdown list selection and get switchInfo to switch which images to display
 $('#getArtistImages').on("submit", function (event) {
     event.preventDefault();
@@ -173,7 +204,25 @@ function displayImages() {
             });
             break;
         case "false false true":
-            console.log("This is a other")
+            console.log("This is an Other")
+            console.log(otherUrl)
+            $.get(otherUrl, function (res) {
+                console.log(res[0])
+                var imageArray = res.map(function (obj) {
+                    console.log(obj)
+                    return {
+                        location: obj.other_location,
+                        name: obj.other_name,
+                        size: obj.other_height + " x " + obj.other_width + " x " + obj.other_depth,
+                        price: obj.other_price,
+                        type: obj.art_type,
+                        id: obj.id
+                    };
+                });
+                images = imageArray;
+                console.log(images)
+                layoutImages()
+            });
             break;
         case "true true false":
             console.log("This is a painter/sculptor")

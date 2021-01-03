@@ -36,6 +36,13 @@ const artistData = [
         artist_sculptor: 1,
         artist_other: 0,
     },
+    {
+        artist_firstName: 'Gloria',
+        artist_lastName: 'D',
+        artist_painter: 0,
+        artist_sculptor: 0,
+        artist_other: 1,
+    },
 ];
 
 const seedCategories = () => Artist.bulkCreate(artistData);
