@@ -159,7 +159,8 @@ function artistType(id) {
 function displayImages() {
     console.log(switchInfo)
     const paintingUrl = "http://localhost:3001/api/paintings/" + Id;
-    const sculptureUrl = "http://localhost:3001/api/sculptures/" + Id
+    const sculptureUrl = "http://localhost:3001/api/sculptures/" + Id;
+    const otherUrl = "http://localhost:3001/api/others/" + Id;
     switch (switchInfo) {
         case "true false false":
             console.log("This is a painter")
