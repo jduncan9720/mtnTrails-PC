@@ -1,92 +1,90 @@
 const router = require('express').Router();
 const multer = require('multer')
 const upload = multer({dest: 'uploads/'})
-const type = upload.single('sculpture_filename')
-const { Artist, Painting, Sculpture } = require('../../models');
+const type = upload.single('other_filename')
+const { Artist, Painting, Sculpture, Other } = require('../../models');
 const uploadFile = require('../../upload')
 const deleteFile = require('../../delete')
 
-let sculpturePath = "";
+let otherPath = "";
 
-//GET all Sculptures
+//GET all Others
 router.get('/', async (req, res) => {
     try{
-        const sculptureData = await Sculpture.findAll({
+        const otherData = await Other.findAll({
             include: [{ model: Artist}]
         });
-        res.status(200).json(sculptureData);
+        res.status(200).json(otherData);
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
     }
-});
+})
 
-//Get Sculpture by Id
+//GET Others by Id
 router.get('/id/:id', async (req, res) => {
     try {
-        const sculptureData = await Sculpture.findByPk(req.params.id, {
+        const otherData = await Other.findByPk(req.params.id, {
             where: {
                 id: req.params.id,
             }
         });
-        res.status(200).json(sculptureData);
-        sculpturePath = sculptureData.sculpture_filename
-        console.log(sculpturePath)
+        res.status(200).json(otherData);
+        otherPath = otherData.other_filename
+        console.log(otherPath)
     } catch (err) {
         console.log(err)
         res.status(500).json(err)
     }
 });
 
-//Get Sculptures by Artist
+//GET Others by Artist
 router.get('/:id', async (req, res) => {
     try{
-        const sculptureData = await Sculpture.findAll({
+        const otherData = await Other.findAll({
             where: {
                 artist_id: req.params.id,
             }
         });
-        if (!sculptureData) {
+        if (!otherData) {
             res.status(404).json({ message: "There are no artists with that id!"})
             return;
         }
-        res.status(200).json(sculptureData);
+        res.status(200).json(otherData);
     } catch (err) {
         res.status(500).json(err)
     }
 });
 
-//CREATE a new Sculpture
-
-router.post('/', uploadFile.single('sculpture_filename'), async (req, res) => {
+//CREATE a new Other
+router.post('/', uploadFile.single('other_filename'), async (req, res) => {
     try {
         console.log("body", req.body)
         console.log("fileData", req.file)
         
-        req.body.sculpture_filename = req.file.key
-        req.body.sculpture_location = req.file.location
+        req.body.other_filename = req.file.key
+        req.body.other_location = req.file.location
         
-        const newSculpture = Sculpture.create(req.body);
-        res.status(200).json(newSculpture);
+        const newOther = Other.create(req.body);
+        res.status(200).json(newOther);
     
     } catch (err) {
         res.status(400).json(err);
     }
 });
 
-//EDIT a sculpture by ID
-
+//EDIT an Other by Id
 router.post('/:id', async (req, res) => {
     try {
         console.log("body", req.body)
 
-        const sculptureData = await Sculpture.update(
+        const otherData = await Other.update(
             {
-                sculpture_name: req.body.sculpture_name,
-                sculpture_height: req.body.sculpture_height,
-                sculpture_width: req.body.sculpture_width,
-                sculpture_depth: req.body.sculpture_depth,
-                sculpture_price: req.body.sculpture_price,
+                Other_name: req.body.Other_name,
+                Other_height: req.body.Other_height,
+                Other_width: req.body.Other_width,
+                Other_depth: req.body.Other_depth,
+                Other_price: req.body.Other_price,
                 artist_id: req.body.artist_id
             },
             {
@@ -95,27 +93,26 @@ router.post('/:id', async (req, res) => {
                 },
             }
         )
-        res.status(200).json(sculptureData)
+        res.status(200).json(otherData)
     } catch (err) {
         res.status(400).json(err);
     }
 })
 
-// DELETE a Painting by ID
-
+//DELETE an Other by Id
 router.delete('/:id', async (req, res) => {
     try {
-        const sculptureData = await Sculpture.destroy({
+        const otherData = await Other.destroy({
             where: {
                 id: req.params.id,
             }
         });
-        if (!sculptureData) {
-            res.status(404).json({ message: "There's no sculpture with that id!" });
+        if (!otherData) {
+            res.status(404).json({ message: "There's no Other with that id!" });
             return;
         }
-        res.status(200).json(sculptureData);
-        deleteFile(sculpturePath)
+        res.status(200).json(otherData);
+        deleteFile(otherPath)
     } catch (err) {
         res.status(500).json(err)
     }

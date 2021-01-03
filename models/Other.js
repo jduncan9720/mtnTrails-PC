@@ -1,10 +1,10 @@
-const { Model, DataTypes } = require('sequelize');
+const { Model, DataTyes, DataTypes } = require('sequelize');
 
 const sequelize = require('../config/connection.js');
 
-class Painting extends Model { }
+class Other extends Model { }
 
-Painting.init(
+Other.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -16,29 +16,35 @@ Painting.init(
             type: DataTypes.STRING,
             allowNull: false,
         },
-        painting_name: {
+        other_name: {
             type: DataTypes.STRING,
             allowNull: false,
         },
-        painting_height: {
+        other_height: {
             type: DataTypes.DECIMAL(10, 2),
             validate: {
                 isDecimal: true,
             }
         },
-        painting_width: {
+        other_width: {
             type: DataTypes.DECIMAL(10, 2),
             validate: {
                 isDecimal: true,
             }
         },
-        painting_price: {
+        other_depth: {
             type: DataTypes.DECIMAL(10, 2),
             validate: {
                 isDecimal: true,
             }
         },
-        painting_filename: {
+        other_price: {
+            type: DataTypes.DECIMAL(10, 2),
+            validate: {
+                isDecimal: true,
+            }
+        },
+        other_filename: {
             type: DataTypes.STRING,
             allowNull: false,
         },
@@ -49,7 +55,7 @@ Painting.init(
                 key: 'id'
             }
         }, 
-        painting_location: {
+        other_location: {
             type: DataTypes.STRING,
             allowNull: false,
         }
@@ -59,9 +65,8 @@ Painting.init(
         timestamps: true,
         freezeTableName: true,
         underscored: true,
-        modelName: 'painting',
+        modelName: 'other',
     }
-
 );
 
-module.exports = Painting;
+module.exports = Other;
