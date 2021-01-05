@@ -341,7 +341,31 @@ $("#imagesTestArea").on("click", ".deletebtn", async function () {
             });
             break;
         case "other":
-            alert("Need to do this")
+            fileURL = "http://localhost:3001/api/others/id/" + buttonVal
+            console.log(fileURL)
+            var delFileName;
+            //Get other filename for delete
+            $.ajax({
+                type: "GET",
+                url: fileURL,
+                dataType: "json",
+                success: function (res) {
+                    delFileName = res.other_filename;
+                    console.log(delFileName)
+                }
+                //AWS s3 delete runs through the other_routes
+            });
+
+            //Delete Other from the database
+            var queryURL = "http://localhost:3001/api/others/" + buttonVal
+            $.ajax({
+                url: queryURL,
+                type: 'DELETE',
+                success: console.log("Other Deleted!"),
+                error: function (error) {
+                    console.log(error)
+                }
+            });
             break;
     }
 

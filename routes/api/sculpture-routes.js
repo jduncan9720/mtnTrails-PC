@@ -101,7 +101,7 @@ router.post('/:id', async (req, res) => {
     }
 })
 
-// DELETE a Painting by ID
+// DELETE a Sculpture by ID
 
 router.delete('/:id', async (req, res) => {
     try {
