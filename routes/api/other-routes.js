@@ -80,11 +80,11 @@ router.post('/:id', async (req, res) => {
 
         const otherData = await Other.update(
             {
-                Other_name: req.body.Other_name,
-                Other_height: req.body.Other_height,
-                Other_width: req.body.Other_width,
-                Other_depth: req.body.Other_depth,
-                Other_price: req.body.Other_price,
+                other_name: req.body.other_name,
+                other_height: req.body.other_height,
+                other_width: req.body.other_width,
+                other_depth: req.body.other_depth,
+                other_price: req.body.other_price,
                 artist_id: req.body.artist_id
             },
             {

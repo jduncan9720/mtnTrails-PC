@@ -282,7 +282,7 @@ function displayImages() {
     }
 }
 
-//Delete a painting or sculpture
+//Delete a painting, sculpture or other.
 $("#imagesTestArea").on("click", ".deletebtn", async function () {
     buttonVal = $(this).data("deletevalue")
     switch ($(this).data("arttype")) {
@@ -487,7 +487,7 @@ $("#imagesTestArea").on("click", ".editbtn", async function () {
               <input name="sculpture_price" type="text" class="form-control" id="editsculpturePrice" value="${res.sculpture_price}">
             </div>
             <div class="form-group">
-              <label for="editsculptureArtist">Sculpture Name:</label>
+              <label for="editsculptureArtist">Artist Name:</label>
               <select name="artist_id" class="custom-select mr-sm-2" id="editsculptureArtist">
                 <option selected>Choose...</option>
               </select>
@@ -519,13 +519,83 @@ $("#imagesTestArea").on("click", ".editbtn", async function () {
             });
             break;
         case "other":
-            alert("Need to finish this")
+            queryURL = "http://localhost:3001/api/others/id/" + buttonVal
+            console.log(queryURL)
+            $.ajax({
+                url: queryURL,
+                type: 'GET',
+                dataType: 'json',
+                success: function (res) {
+                    console.log(res.id)
+                    console.log(res.other_name)
+                    console.log(res.other_height)
+                    console.log(res.other_width)
+                    console.log(res.other_depth)
+                    console.log(res.other_price)
+                    console.log(res.artist_id)
+                    console.log(res.other_location)
+                    var modalHeader = `<div class="modal-header">
+                <img class="modal-image" id="editImage" src="${res.other_location}">
+            </div>`;
+                    var modalBody = `<div class="modal-body" id="editForm">
+            <form id="editOther" name="editOther">
+            <div class="form-group">
+              <label for="editotherName">Other Name:</label>
+              <input name="other_name" type="text" class="form-control" id="editotherName" value="${res.other_name}">
+            </div>
+            <div class="form-group">
+              <label for="editotherHeight">Other Height:</label>
+              <input name="other_height" type="text" class="form-control" id="editotherHeight" value="${res.other_height}">
+            </div>
+            <div class="form-group">
+              <label for="editotherWidth">Other Width:</label>
+              <input name="other_width" type="text" class="form-control" id="editotherWidth" value="${res.other_width}">
+            </div>
+            <div class="form-group">
+              <label for="editotherDepth">Other Depth:</label>
+              <input name="other_depth" type="text" class="form-control" id="editotherDepth" value="${res.other_depth}">
+            </div>
+            <div class="form-group">
+              <label for="editotherPrice">Other Price:</label>
+              <input name="other_price" type="text" class="form-control" id="editotherPrice" value="${res.other_price}">
+            </div>
+            <div class="form-group">
+              <label for="editotherArtist">Artist Name:</label>
+              <select name="artist_id" class="custom-select mr-sm-2" id="editotherArtist">
+                <option selected>Choose...</option>
+              </select>
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary" id="editSubmit" data-arttype="${res.art_type}" data-othervalue="${res.id}">Submit</button>
+          </form>  
+            </div>`
+                    var modalFooter = `<div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>`
+                    $(modalHeader).appendTo("#modalContent")
+                    $(modalBody).appendTo("#modalContent")
+                    $(modalFooter).appendTo("#modalContent")
+                },
+                error: function (error) {
+                    console.log(error)
+                },
+            })
+            $.get(artistURL, function (res) {
+                var artistArray = res.map(function (obj) {
+                    return { name: obj.artist_firstName + " " + obj.artist_lastName, value: obj.id };
+                });
+                artists = artistArray;
+                console.log(artists)
+                for (var i = 0; i < artists.length; i++) {
+                    $('<option/>').val(artists[i].value).html(artists[i].name).appendTo('#editotherArtist');
+                }
+            });
             break;
     }
 
 });
 
-//Edit painting by ID
+//Edit painting, sculpture or other by ID
 $('#editModal').on("submit", function (event) {
     event.preventDefault();
     switch ($("#editSubmit").data("arttype")) {
@@ -575,7 +645,27 @@ $('#editModal').on("submit", function (event) {
             })
             break;
         case "other":
-            alert("still need to fix this")
+            const submitOtherVal = $('#editSubmit').data("othervalue")
+            const editOtherUrl = "http://localhost:3001/api/others/" + submitOtherVal
+            const otherData = {
+                "other_name": $('#editotherName').val(),
+                "other_height": $('#editotherHeight').val(),
+                "other_width": $('#editotherWidth').val(),
+                "other_depth": $('#editsotherDepth').val(),
+                "other_price": $('#editotherPrice').val(),
+                "artist_id": $('#editotherArtist').val()
+            }
+            console.log(otherData)
+
+            $.ajax({
+                type: "POST",
+                url: editOtherUrl,
+                data: otherData,
+                success: console.log("Other Edited"),
+                error: function (error) {
+                    console.log(error)
+                }
+            })
             break;
 
     }
