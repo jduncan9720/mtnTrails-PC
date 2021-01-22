@@ -1,20 +1,14 @@
+require("dotenv").config
 const express = require('express');
 const app = express();
 const AWS = require('aws-sdk');
 const multer  = require('multer');
 const multers3 = require('multer-s3');
 
-// Enter copied or downloaded access ID and secret key here
-const ID = 'AKIAJXPH3N6A4O5A3N3A';
-const SECRET = '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';
-
-
-// The name of the bucket that you have created
-const BUCKET_NAME = 'mtgartworkbucket';
 
 const s3 = new AWS.S3({
-    accessKeyId: ID,
-    secretAccessKey: SECRET
+    accessKeyId: process.env.ID,
+    secretAccessKey: process.env.SECRET
 });
 
 // const uploadFile = (file) => {
@@ -38,7 +32,7 @@ const uploadFile = multer({
     storage: multers3({
       s3: s3,
       acl: 'public-read',
-      bucket: BUCKET_NAME,
+      bucket: process.env.BUCKET_NAME,
       metadata: (req, file, cb) => {
         cb(null, {fieldName: file.fieldname})
       },
